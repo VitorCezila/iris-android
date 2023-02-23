@@ -2,7 +2,16 @@ package com.ghn.iris.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
+//Primarys
+val SocialPink = Color(0xFFF62E8E)
+val SocialBlue = Color(0xFF2E8AF6)
+val DarkBlack = Color(0xFF181A1C)
+val LightWhite = Color(0xFFECEBED)
+val Black = Color(0xFF000000) // Navigation Feed
+val White = Color(0xFFFFFFFF)
+val GradientLight = Color(0xFFF62E8E)
+val GradientDark = Color(0xFFAC1AF0)
+
+// Secondary
+val DarkGray = Color(0xFF323436)
+val LightGray = Color(0xFF727477) // Used to texts
