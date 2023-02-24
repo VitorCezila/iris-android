@@ -1,16 +1,15 @@
 package com.ghn.iris.presentation.login_screen
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -96,13 +95,27 @@ fun LoginScreen(
                 .fillMaxSize()
         ) {
             Button(
-                onClick = { /* Ação do botão */ },
-                shape = RoundedCornerShape(20.dp),
+                onClick = { },
+                colors = ButtonDefaults.buttonColors(backgroundColor = SocialPink),
+                shape = RoundedCornerShape(50),
                 modifier = Modifier
-                    .background(SocialPink)
                     .fillMaxWidth()
+                    .padding(start = SpaceBigLarge, end = SpaceBigLarge)
             ) {
                 Text(text = "LOGIN", color = White)
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(text = "Dont have an account? ", color = LightGray)
+                Box(
+                    modifier = Modifier
+                        .clickable {
+                        }
+                ) {
+                    Text(
+                        text = "Sign Up",
+                        color = SocialPink,
+                    )
+                }
             }
         }
     }

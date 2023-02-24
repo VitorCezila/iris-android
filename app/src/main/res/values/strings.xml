@@ -4,4 +4,6 @@
     <string name="login_subtitle">Enter Your Username &amp; Password</string>
     <string name="login_username_email">Username / Email</string>
     <string name="login_password">Password</string>
+    <string name="password_visible_content_description">Hide password</string>
+    <string name="password_hidden_content_description">Show Password</string>
 </resources>
