@@ -1,4 +1,4 @@
-package com.ghn.iris.ui.theme
+package com.ghn.iris.presentation.ui.theme
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
