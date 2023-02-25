@@ -18,6 +18,7 @@ import androidx.navigation.NavController
 import com.ghn.iris.R
 import com.ghn.iris.presentation.components.UnderlinedTextField
 import com.ghn.iris.presentation.ui.theme.*
+import com.ghn.iris.presentation.util.Screen
 
 @Composable
 fun LoginScreen(
@@ -85,7 +86,11 @@ fun LoginScreen(
                 onValueChange = {
                     viewModel.setPasswordText(it)
                 },
-                keyBoardType = KeyboardType.Password
+                keyBoardType = KeyboardType.Password,
+                showPasswordToggle = viewModel.showPassword.value,
+                onPasswordToggleClick = {
+                    viewModel.setShowPassword(it)
+                }
             )
         }
         Column(
@@ -109,6 +114,7 @@ fun LoginScreen(
                 Box(
                     modifier = Modifier
                         .clickable {
+                            navController.navigate(Screen.RegisterScreen.route)
                         }
                 ) {
                     Text(
