@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ghn.iris.presentation.login_screen.LoginScreen
+import com.ghn.iris.presentation.register_screen.RegisterScreen
 import com.ghn.iris.presentation.splash_screen.SplashScreen
 
 @Composable
@@ -19,6 +20,9 @@ fun Navigation() {
         }
         composable(Screen.LoginScreen.route) {
             LoginScreen(navController = navController)
+        }
+        composable(Screen.RegisterScreen.route) {
+            RegisterScreen(navController = navController)
         }
     }
 }

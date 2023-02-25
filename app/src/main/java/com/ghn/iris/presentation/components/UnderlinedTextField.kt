@@ -28,13 +28,12 @@ fun UnderlinedTextField(
     maxLength: Int = 40,
     isError: Boolean = false,
     keyBoardType: KeyboardType = KeyboardType.Text,
+    showPasswordToggle: Boolean = false,
+    onPasswordToggleClick: (Boolean) -> Unit = {},
     onValueChange: (String) -> Unit
 ) {
     val isPasswordToggleDisplayed by remember {
         mutableStateOf(keyBoardType == KeyboardType.Password)
-    }
-    var isPasswordVisible by remember {
-        mutableStateOf(false)
     }
 
     Column(
@@ -63,7 +62,7 @@ fun UnderlinedTextField(
                 unfocusedIndicatorColor = LightGray,
                 disabledIndicatorColor = LightGray
             ),
-            visualTransformation = if (!isPasswordVisible && isPasswordToggleDisplayed) {
+            visualTransformation = if (!showPasswordToggle && isPasswordToggleDisplayed) {
                 PasswordVisualTransformation()
             } else {
                 VisualTransformation.None
@@ -72,15 +71,15 @@ fun UnderlinedTextField(
             trailingIcon = {
                 if (isPasswordToggleDisplayed) {
                     IconButton(onClick = {
-                        isPasswordVisible = !isPasswordVisible
+                        onPasswordToggleClick(!showPasswordToggle)
                     }) {
                         Icon(
-                            imageVector = if (isPasswordVisible) {
+                            imageVector = if (showPasswordToggle) {
                                 Icons.Filled.VisibilityOff
                             } else {
                                 Icons.Filled.Visibility
                             },
-                            contentDescription = if (isPasswordVisible) {
+                            contentDescription = if (showPasswordToggle) {
                                 stringResource(id = R.string.password_visible_content_description)
                             } else {
                                 stringResource(id = R.string.password_hidden_content_description)

@@ -6,4 +6,8 @@
     <string name="login_password">Password</string>
     <string name="password_visible_content_description">Hide password</string>
     <string name="password_hidden_content_description">Show Password</string>
+    <string name="register_title">Create Account :)</string>
+    <string name="register_create_email">Create Email</string>
+    <string name="register_create_username">Create Username</string>
+    <string name="register_create_password">Create Password</string>
 </resources>
