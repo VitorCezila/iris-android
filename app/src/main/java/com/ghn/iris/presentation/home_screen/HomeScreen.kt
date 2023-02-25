@@ -1,16 +1,16 @@
 package com.ghn.iris.presentation.home_screen
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.ghn.iris.domain.Post
 import com.ghn.iris.presentation.components.Post
-import com.ghn.iris.presentation.ui.theme.SpaceLarge
+import com.ghn.iris.presentation.ui.theme.DarkGray
 
 @Composable
 fun HomeScreen(
@@ -20,12 +20,11 @@ fun HomeScreen(
         modifier = Modifier
             .fillMaxSize()
     ) {
-        Column(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            Post(
-                mockPost
-            )
+        LazyColumn {
+            items(6) {
+                Post(mockPost)
+                Divider(color = DarkGray, thickness = 3.dp)
+            }
         }
     }
 }
