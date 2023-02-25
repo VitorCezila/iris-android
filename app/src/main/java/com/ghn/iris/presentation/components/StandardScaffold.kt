@@ -1,24 +1,23 @@
 package com.ghn.iris.presentation.components
 
 import android.annotation.SuppressLint
-import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.BottomAppBar
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.Scaffold
-import androidx.compose.material.ScaffoldState
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.ghn.iris.presentation.ui.theme.Black
 import com.ghn.iris.R
 import com.ghn.iris.domain.BottomNavItem
+import com.ghn.iris.presentation.ui.theme.*
 import com.ghn.iris.presentation.util.Screen
-import timber.log.Timber
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -38,6 +37,7 @@ fun StandardScaffold(
             icon = ImageVector.vectorResource(id = R.drawable.ic_search),
             contentDescription = "Search"
         ),
+        BottomNavItem(route = "-"),
         BottomNavItem(
             route = Screen.NotificationScreen.route,
             icon = ImageVector.vectorResource(id = R.drawable.ic_notifications),
@@ -49,6 +49,7 @@ fun StandardScaffold(
             contentDescription = "Profile"
         ),
     ),
+    onFabClick: () -> Unit = {},
     content: @Composable () -> Unit,
 ) {
     Scaffold(
@@ -81,6 +82,23 @@ fun StandardScaffold(
             }
         },
         scaffoldState = state,
+        floatingActionButton = {
+            if (showBottomBar) {
+                FloatingActionButton(
+                    backgroundColor = Transparent,
+                    onClick = onFabClick,
+                    elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp),
+                    modifier = Modifier.background(GradientBrush, CircleShape)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = stringResource(id = R.string.make_post)
+                    )
+                }
+            }
+        },
+        floatingActionButtonPosition = FabPosition.Center,
+        isFloatingActionButtonDocked = true,
         modifier = modifier
     ) {
         content()

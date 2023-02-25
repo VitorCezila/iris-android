@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.ghn.iris.presentation.create_post_screen.CreatePostScreen
 import com.ghn.iris.presentation.home_screen.HomeScreen
 import com.ghn.iris.presentation.login_screen.LoginScreen
 import com.ghn.iris.presentation.notification_screen.NotificationScreen
@@ -45,6 +46,9 @@ fun Navigation(
         }
         composable(Screen.ProfileScreen.route) {
             ProfileScreen()
+        }
+        composable(Screen.CreatePostScreen.route) {
+            CreatePostScreen()
         }
     }
 }

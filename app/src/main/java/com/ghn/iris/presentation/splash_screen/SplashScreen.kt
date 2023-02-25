@@ -3,18 +3,21 @@ package com.ghn.iris.presentation.splash_screen
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.ghn.iris.R
+import com.ghn.iris.presentation.ui.theme.GradientBrush
 import com.ghn.iris.presentation.util.Screen
 import com.ghn.iris.util.Constants
 import kotlinx.coroutines.CoroutineDispatcher
@@ -53,10 +56,18 @@ fun SplashScreen(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.ic_logo),
-            contentDescription = "Logo",
-            modifier = Modifier.scale(scale = scale.value)
+        Text(
+            text = "Íris",
+            style = MaterialTheme.typography.h1,
+            fontSize = 36.sp,
+            modifier = Modifier
+                .graphicsLayer(alpha = 0.99f)
+                .drawWithCache {
+                    onDrawWithContent {
+                        drawContent()
+                        drawRect(GradientBrush, blendMode = BlendMode.SrcAtop)
+                    }
+                }
         )
     }
 }

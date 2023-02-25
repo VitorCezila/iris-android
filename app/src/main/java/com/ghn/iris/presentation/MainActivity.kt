@@ -37,7 +37,10 @@ class MainActivity : ComponentActivity() {
                         navController = navController,
                         modifier = Modifier.fillMaxSize(),
                         showBottomBar = shouldShowBottomBar(navBackStackEntry),
-                        state = scaffoldState
+                        state = scaffoldState,
+                        onFabClick = {
+                            navController.navigate(Screen.CreatePostScreen.route)
+                        }
                     ) {
                         Navigation(navController, scaffoldState)
                     }
