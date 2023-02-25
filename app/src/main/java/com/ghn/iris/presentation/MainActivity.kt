@@ -6,10 +6,18 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.rememberScaffoldState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavBackStackEntry
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.ghn.iris.presentation.components.StandardScaffold
 import com.ghn.iris.presentation.ui.theme.IrisTheme
 import com.ghn.iris.presentation.util.Navigation
+import com.ghn.iris.presentation.util.Screen
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -21,9 +29,32 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background,
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    Navigation()
+                    val navController = rememberNavController()
+                    val navBackStackEntry by navController.currentBackStackEntryAsState()
+                    val scaffoldState = rememberScaffoldState()
+
+                    StandardScaffold(
+                        navController = navController,
+                        modifier = Modifier.fillMaxSize(),
+                        showBottomBar = shouldShowBottomBar(navBackStackEntry),
+                        state = scaffoldState,
+                        onFabClick = {
+                            navController.navigate(Screen.CreatePostScreen.route)
+                        }
+                    ) {
+                        Navigation(navController, scaffoldState)
+                    }
                 }
             }
         }
+    }
+
+    private fun shouldShowBottomBar(navBackStackEntry: NavBackStackEntry?): Boolean {
+        return navBackStackEntry?.destination?.route in listOf(
+            Screen.HomeScreen.route,
+            Screen.SearchScreen.route,
+            Screen.NotificationScreen.route,
+            Screen.ProfileScreen.route
+        )
     }
 }

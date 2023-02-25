@@ -1,5 +1,7 @@
 package com.ghn.iris.presentation.ui.theme
 
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
 //Primarys
@@ -13,6 +15,11 @@ val White = Color(0xFFFFFFFF)
 // Gradient
 val GradientLight = Color(0xFFF62E8E)
 val GradientDark = Color(0xFFAC1AF0)
+val GradientBrush = Brush.linearGradient(
+    colors = listOf(GradientLight, GradientDark),
+    start = Offset.Zero,
+    end = Offset(100f, 0f)
+)
 
 // Secondary
 val DarkGray = Color(0xFF323436) // Divider

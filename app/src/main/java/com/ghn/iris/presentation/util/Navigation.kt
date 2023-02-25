@@ -1,20 +1,30 @@
 package com.ghn.iris.presentation.util
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.ScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import com.ghn.iris.presentation.create_post_screen.CreatePostScreen
 import com.ghn.iris.presentation.home_screen.HomeScreen
 import com.ghn.iris.presentation.login_screen.LoginScreen
+import com.ghn.iris.presentation.notification_screen.NotificationScreen
+import com.ghn.iris.presentation.profile_screen.ProfileScreen
 import com.ghn.iris.presentation.register_screen.RegisterScreen
+import com.ghn.iris.presentation.search_screen.SearchScreen
 import com.ghn.iris.presentation.splash_screen.SplashScreen
 
 @Composable
-fun Navigation() {
-    val navController = rememberNavController()
+fun Navigation(
+    navController: NavHostController,
+    scaffoldState: ScaffoldState
+) {
     NavHost(
         navController = navController,
-        startDestination = Screen.SplashScreen.route
+        startDestination = Screen.SplashScreen.route,
+        modifier = Modifier.fillMaxSize()
     ) {
         composable(Screen.SplashScreen.route) {
             SplashScreen(navController)
@@ -27,6 +37,18 @@ fun Navigation() {
         }
         composable(Screen.HomeScreen.route) {
             HomeScreen(navController = navController)
+        }
+        composable(Screen.SearchScreen.route) {
+            SearchScreen(navController = navController)
+        }
+        composable(Screen.NotificationScreen.route) {
+            NotificationScreen()
+        }
+        composable(Screen.ProfileScreen.route) {
+            ProfileScreen()
+        }
+        composable(Screen.CreatePostScreen.route) {
+            CreatePostScreen()
         }
     }
 }

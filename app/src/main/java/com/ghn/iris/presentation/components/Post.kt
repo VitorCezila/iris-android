@@ -33,7 +33,7 @@ fun Post(
     onUserClicked: () -> Unit = {},
     onSaveClicked: () -> Unit = {},
     onDeleteClick: () -> Unit = {}
-    ) {
+) {
     Column(
         modifier = Modifier
             .padding(16.dp)
@@ -41,14 +41,15 @@ fun Post(
             .background(DarkBlack)
     ) {
         Row(
-            verticalAlignment = Alignment.CenterVertically,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
                 painterResource(id = R.drawable.cezila),
                 contentDescription = "Profile picture",
                 modifier = Modifier
                     .size(50.dp)
-                    .clip(RoundedCornerShape(25.dp)),
+                    .clip(RoundedCornerShape(25.dp))
+                    .clickable { onUserClicked },
             )
             Spacer(modifier = Modifier.width(16.dp))
             Column(
@@ -58,7 +59,8 @@ fun Post(
                     text = post.username,
                     style = MaterialTheme.typography.body2,
                     fontWeight = FontWeight.Bold,
-                    color = SocialWhite
+                    color = SocialWhite,
+                    modifier = Modifier.clickable { onUserClicked }
                 )
                 Text(
                     text = post.formattedTime,
@@ -71,6 +73,9 @@ fun Post(
         Spacer(modifier = Modifier.height(16.dp))
         Column(modifier = Modifier
             .fillMaxWidth()
+            .clickable {
+                onPostClicked
+            }
         ) {
             Text(
                 text = post.content,
