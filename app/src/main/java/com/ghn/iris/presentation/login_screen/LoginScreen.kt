@@ -100,7 +100,9 @@ fun LoginScreen(
                 .fillMaxSize()
         ) {
             Button(
-                onClick = { },
+                onClick = {
+                    navController.navigate(Screen.HomeScreen.route)
+                },
                 colors = ButtonDefaults.buttonColors(backgroundColor = SocialPink),
                 shape = RoundedCornerShape(50),
                 modifier = Modifier
