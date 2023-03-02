@@ -11,4 +11,17 @@
     <string name="register_create_username">Create Username</string>
     <string name="register_create_password">Create Password</string>
     <string name="make_post">Make Post</string>
+    <string name="back">Back</string>
+    <string name="post">POST</string>
+    <string name="unlike">unlike</string>
+    <string name="like">like</string>
+    <string name="message">Message</string>
+    <string name="alerts">Alerts</string>
+    <string name="notification_icon">Notification Icon</string>
+    <string name="liked">liked</string>
+    <string name="commented_on">commented on</string>
+    <string name="your_post">your post</string>
+    <string name="followed_you">followed you</string>
+    <string name="your_comment">your comment</string>
+
 </resources>

@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -20,8 +21,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.ghn.iris.R
-import com.ghn.iris.domain.Post
+import com.ghn.iris.domain.models.Post
 import com.ghn.iris.presentation.ui.theme.*
+import com.ghn.iris.util.Constants.ProfilePictureSize
 
 @Composable
 fun Post(
@@ -47,9 +49,9 @@ fun Post(
                 painterResource(id = R.drawable.cezila),
                 contentDescription = "Profile picture",
                 modifier = Modifier
-                    .size(50.dp)
+                    .size(ProfilePictureSize)
                     .clip(RoundedCornerShape(25.dp))
-                    .clickable { onUserClicked },
+                    .clickable { onUserClicked() },
             )
             Spacer(modifier = Modifier.width(16.dp))
             Column(
@@ -60,7 +62,7 @@ fun Post(
                     style = MaterialTheme.typography.body2,
                     fontWeight = FontWeight.Bold,
                     color = SocialWhite,
-                    modifier = Modifier.clickable { onUserClicked }
+                    modifier = Modifier.clickable { onUserClicked() }
                 )
                 Text(
                     text = post.formattedTime,
@@ -74,7 +76,7 @@ fun Post(
         Column(modifier = Modifier
             .fillMaxWidth()
             .clickable {
-                onPostClicked
+                onPostClicked()
             }
         ) {
             Text(
@@ -128,21 +130,20 @@ fun Post(
 }
 
 @Composable
-private fun PostAction(
+fun PostAction(
     icon: ImageVector,
     count: Int?,
     isSelected: Boolean = false,
     onClick: () -> Unit,
 ) {
-    Box(
-        modifier = Modifier
-            .clickable(onClick = onClick)
-            .height(36.dp)
-            .wrapContentWidth(),
-        contentAlignment = Alignment.Center,
+    IconButton(
+        onClick = onClick
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .height(36.dp)
+                .wrapContentWidth(),
         ) {
             Icon(
                 imageVector = icon,
