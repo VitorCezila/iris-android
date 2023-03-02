@@ -15,7 +15,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.ghn.iris.R
-import com.ghn.iris.domain.BottomNavItem
+import com.ghn.iris.domain.models.BottomNavItem
 import com.ghn.iris.presentation.ui.theme.*
 import com.ghn.iris.presentation.util.Screen
 
