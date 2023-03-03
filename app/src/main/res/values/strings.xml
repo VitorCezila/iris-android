@@ -23,5 +23,12 @@
     <string name="your_post">your post</string>
     <string name="followed_you">followed you</string>
     <string name="your_comment">your comment</string>
+    <string name="banner_image">Banner Image</string>
+    <string name="profile_image">Profile Image</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="unfollow">Unfollow</string>
+    <string name="follow">Follow</string>
+    <string name="edit_profile">Edit Profile</string>
 
 </resources>

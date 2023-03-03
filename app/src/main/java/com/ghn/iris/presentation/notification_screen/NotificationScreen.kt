@@ -15,6 +15,7 @@ import com.ghn.iris.R
 import com.ghn.iris.domain.models.Notification
 import com.ghn.iris.domain.util.NotificationAction
 import com.ghn.iris.presentation.components.StandardToolbar
+import com.ghn.iris.presentation.notification_screen.components.NotificationItem
 import com.ghn.iris.presentation.ui.theme.DarkGray
 import com.ghn.iris.presentation.ui.theme.SpaceLarge
 import com.ghn.iris.presentation.ui.theme.SpaceMedium

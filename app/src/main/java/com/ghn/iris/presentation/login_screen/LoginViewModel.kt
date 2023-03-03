@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import javax.inject.Inject
 
-class LoginViewModel @Inject constructor(): ViewModel() {
+class LoginViewModel @Inject constructor() : ViewModel() {
 
     private val _usernameText = mutableStateOf("")
     val usernameText: State<String> = _usernameText
@@ -25,6 +25,6 @@ class LoginViewModel @Inject constructor(): ViewModel() {
     }
 
     fun setShowPassword(showPassword: Boolean) {
-        _showPassword. value = showPassword
+        _showPassword.value = showPassword
     }
 }

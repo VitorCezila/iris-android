@@ -25,9 +25,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.ghn.iris.R
+import com.ghn.iris.domain.models.Comment
 import com.ghn.iris.domain.models.Post
 import com.ghn.iris.presentation.components.PostAction
 import com.ghn.iris.presentation.components.StandardToolbar
+import com.ghn.iris.presentation.post_detail_screen.components.Comment
 import com.ghn.iris.presentation.ui.theme.*
 import com.ghn.iris.presentation.util.Screen
 import com.ghn.iris.util.Constants
@@ -164,7 +166,7 @@ fun PostDetailScreen(
             }
             items(post.commentCount) {
                 Comment(
-                    comment = com.ghn.iris.domain.models.Comment(
+                    comment = Comment(
                         id = "0",
                         username = "Sheep",
                         profilePictureUrl = "",

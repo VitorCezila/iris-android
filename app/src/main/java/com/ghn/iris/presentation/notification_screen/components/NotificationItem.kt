@@ -1,4 +1,4 @@
-package com.ghn.iris.presentation.notification_screen
+package com.ghn.iris.presentation.notification_screen.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
