@@ -31,4 +31,3 @@ Iris, you can create posts, follow your favorite users, and engage in chat conve
   a community of like-minded individuals.
 - Engage in real-time conversations with other Iris users through the chat feature. Chat with your
   friends or connect with new people who share your interests.
-- 
