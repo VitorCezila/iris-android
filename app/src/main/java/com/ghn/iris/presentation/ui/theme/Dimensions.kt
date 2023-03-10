@@ -6,3 +6,5 @@ val SpaceSmall = 8.dp
 val SpaceMedium = 16.dp
 val SpaceLarge = 24.dp
 val SpaceBigLarge = 60.dp
+
+val IconSizeMedium = 25.dp

@@ -1,33 +1,30 @@
 package com.ghn.iris.presentation.profile_screen
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
-import androidx.compose.ui.input.nestedscroll.NestedScrollSource
-import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.ghn.iris.domain.models.Post
 import com.ghn.iris.domain.models.User
 import com.ghn.iris.presentation.components.Post
 import com.ghn.iris.presentation.profile_screen.components.BannerSection
 import com.ghn.iris.presentation.profile_screen.components.ProfileHeaderSection
 import com.ghn.iris.presentation.ui.theme.DarkGray
-import com.ghn.iris.presentation.ui.theme.SpaceMedium
 import com.ghn.iris.presentation.util.Screen
+import com.ghn.iris.util.Constants.ProfilePictureSizeLarge
 
 @Composable
 fun ProfileScreen(
     onNavigate: (String) -> Unit = {},
-    onNavigateUp: () -> Unit = {}
+    onNavigateUp: () -> Unit = {},
+    viewModel: ProfileViewModel = hiltViewModel(),
+    profilePictureSize: Dp = ProfilePictureSizeLarge
 ) {
     Box(
         modifier = Modifier
@@ -41,7 +38,13 @@ fun ProfileScreen(
                 BannerSection(modifier = Modifier.aspectRatio(2.5f))
             }
             item {
-                ProfileHeaderSection(user = mockUser)
+                ProfileHeaderSection(
+                    user = mockUser,
+                    profilePictureSize = profilePictureSize,
+                    onEditClick = {
+                        onNavigate(Screen.EditProfileScreen.route)
+                    }
+                )
                 Divider(color = DarkGray, thickness = 1.dp)
             }
             items(5) {
