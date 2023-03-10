@@ -12,7 +12,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.ghn.iris.presentation.components.SimpleCircleBorder
 import com.ghn.iris.presentation.ui.theme.DarkGray
+import com.ghn.iris.presentation.ui.theme.SpaceSmall
 
 @Composable
 fun RowFiles(
@@ -23,19 +25,28 @@ fun RowFiles(
 
     Row(
         horizontalArrangement = Arrangement.Start,
+        verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
     ) {
-        IconButton(onClick = {
-            onMenuClicked()
-        }) {
-            if (showMenu) {
-                Icon(Icons.Filled.Close, contentDescription = "Close")
-            } else {
-                Icon(Icons.Filled.Add, contentDescription = "Add")
+
+        SimpleCircleBorder(
+            modifier = Modifier.size(36.dp)
+        ) {
+            IconButton(onClick = {
+                onMenuClicked()
+            }) {
+                if (showMenu) {
+                    Icon(Icons.Filled.Close, contentDescription = "Close")
+                } else {
+                    Icon(Icons.Filled.Add, contentDescription = "Add")
+                }
             }
         }
+        
+        Spacer(modifier = Modifier.width(SpaceSmall))
+
         if (showMenu) {
             Row(
                 modifier = Modifier
@@ -44,15 +55,15 @@ fun RowFiles(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                IconButton(onClick = {  }) {
+                IconButton(onClick = { }) {
                     Icon(Icons.Filled.Image, contentDescription = "Image")
                 }
 
-                IconButton(onClick = {  }) {
+                IconButton(onClick = { }) {
                     Icon(Icons.Filled.CameraAlt, contentDescription = "Camera")
                 }
 
-                IconButton(onClick = {  }) {
+                IconButton(onClick = { }) {
                     Icon(Icons.Filled.Gif, contentDescription = "Gif")
                 }
             }

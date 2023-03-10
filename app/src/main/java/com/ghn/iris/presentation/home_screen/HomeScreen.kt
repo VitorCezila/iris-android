@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.ghn.iris.R
 import com.ghn.iris.domain.models.Post
 import com.ghn.iris.presentation.components.Post
+import com.ghn.iris.presentation.components.SimpleCircleBorder
 import com.ghn.iris.presentation.components.StandardToolbar
 import com.ghn.iris.presentation.ui.theme.DarkGray
 import com.ghn.iris.presentation.ui.theme.White
@@ -35,13 +36,17 @@ fun HomeScreen(
                 )
             },
             navActions = {
-                IconButton(onClick = {
-                    onNavigate(Screen.MessagesScreen.route)
-                }) {
-                    Icon(
-                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_mail),
-                        contentDescription = stringResource(R.string.message)
-                    )
+                SimpleCircleBorder(
+                    modifier = Modifier.size(36.dp)
+                ) {
+                    IconButton(onClick = {
+                        onNavigate(Screen.MessagesScreen.route)
+                    }) {
+                        Icon(
+                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_mail),
+                            contentDescription = stringResource(R.string.message)
+                        )
+                    }
                 }
             },
             modifier = Modifier

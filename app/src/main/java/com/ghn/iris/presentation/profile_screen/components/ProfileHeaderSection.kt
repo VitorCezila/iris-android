@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ghn.iris.R
 import com.ghn.iris.domain.models.User
+import com.ghn.iris.presentation.components.SimpleCircleBorder
 import com.ghn.iris.presentation.ui.theme.*
 
 @Composable
@@ -57,6 +58,7 @@ fun ProfileHeaderSection(
         )
         Row(
             verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
             modifier = Modifier
                 .offset(x = (SpaceSmall + 30.dp) / 2f)
         ) {
@@ -69,15 +71,19 @@ fun ProfileHeaderSection(
 
             Spacer(modifier = Modifier.width(SpaceSmall))
 
-            IconButton(
-                onClick = onMessageClick,
-                modifier = Modifier.size(30.dp)
+            SimpleCircleBorder(
+                modifier = Modifier.size(36.dp)
             ) {
-                Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_mail),
-                    contentDescription = stringResource(R.string.message)
-                )
+                IconButton(
+                    onClick = onMessageClick,
+                ) {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_mail),
+                        contentDescription = stringResource(R.string.message)
+                    )
+                }
             }
+
         }
 
         Spacer(modifier = Modifier.height(SpaceMedium))
