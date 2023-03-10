@@ -17,12 +17,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ghn.iris.R
 import com.ghn.iris.domain.models.User
 import com.ghn.iris.presentation.ui.theme.*
-import com.ghn.iris.util.Constants.ProfilePictureSizeLarge
 
 @Composable
 fun ProfileHeaderSection(
@@ -30,6 +30,7 @@ fun ProfileHeaderSection(
     modifier: Modifier = Modifier,
     isFollowing: Boolean = true,
     isOwnProfile: Boolean = true,
+    profilePictureSize: Dp,
     onEditClick: () -> Unit = {},
     onFollowClick: () -> Unit = {},
     onLogoutClick: () -> Unit = {},
@@ -38,7 +39,7 @@ fun ProfileHeaderSection(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .offset(y = -ProfilePictureSizeLarge / 2f),
+            .offset(y = -profilePictureSize / 2f),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
@@ -46,7 +47,7 @@ fun ProfileHeaderSection(
             contentDescription = stringResource(id = R.string.profile_image),
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
-                .size(ProfilePictureSizeLarge)
+                .size(profilePictureSize)
                 .clip(CircleShape)
                 .border(
                     width = 1.dp,

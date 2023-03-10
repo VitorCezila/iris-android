@@ -8,7 +8,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.ghn.iris.domain.models.Post
+import com.ghn.iris.domain.models.Profile
 import com.ghn.iris.presentation.create_post_screen.CreatePostScreen
+import com.ghn.iris.presentation.edit_profile_screen.EditProfileScreen
 import com.ghn.iris.presentation.home_screen.HomeScreen
 import com.ghn.iris.presentation.login_screen.LoginScreen
 import com.ghn.iris.presentation.message_screen.MessagesScreen
@@ -45,16 +47,25 @@ fun Navigation(
             )
         }
         composable(Screen.SearchScreen.route) {
-            SearchScreen(navController = navController)
+            SearchScreen(
+                onNavigateUp = navController::navigateUp,
+                onNavigate = navController::navigate
+            )
         }
         composable(Screen.NotificationScreen.route) {
             NotificationScreen()
         }
         composable(Screen.ProfileScreen.route) {
-            ProfileScreen()
+            ProfileScreen(
+                onNavigateUp = navController::navigateUp,
+                onNavigate = navController::navigate
+            )
         }
         composable(Screen.CreatePostScreen.route) {
-            CreatePostScreen()
+            CreatePostScreen(
+                onNavigateUp = navController::navigateUp,
+                onNavigate = navController::navigate
+            )
         }
         composable(Screen.MessagesScreen.route) {
             MessagesScreen()
@@ -79,6 +90,25 @@ fun Navigation(
                 onNavigateUp = navController::navigateUp,
                 onNavigate = navController::navigate,
                 post = mockPost
+            )
+        }
+        composable(Screen.EditProfileScreen.route) {
+            val mockProfile = Profile(
+                userId = "0",
+                username = "cezila",
+                profilePictureUrl = "",
+                bannerUrl = "",
+                bio = "Writer by Profession. Artist by Passion!",
+                followerCount = 2467,
+                followingCount = 1589,
+                postCount = 5,
+                isFollowing = false,
+                isOwnProfile = true
+            )
+            EditProfileScreen(
+                onNavigateUp = navController::navigateUp,
+                onNavigate = navController::navigate,
+                profile = mockProfile
             )
         }
     }

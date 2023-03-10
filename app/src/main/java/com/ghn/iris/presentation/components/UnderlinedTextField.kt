@@ -8,14 +8,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import com.ghn.iris.R
 import com.ghn.iris.presentation.ui.theme.LightGray
 import com.ghn.iris.presentation.ui.theme.SocialPink
@@ -27,10 +25,11 @@ fun UnderlinedTextField(
     text: String = "",
     hint: String = "",
     maxLength: Int = 40,
-    isError: Boolean = false,
+    error: String = "",
     keyBoardType: KeyboardType = KeyboardType.Text,
     isPasswordToggleDisplayed: Boolean = keyBoardType == KeyboardType.Password,
     showPasswordToggle: Boolean = false,
+    isSingleLine: Boolean = true,
     onPasswordToggleClick: (Boolean) -> Unit = {},
     onValueChange: (String) -> Unit
 ) {
@@ -49,7 +48,7 @@ fun UnderlinedTextField(
             placeholder = {
                 Text(text = hint)
             },
-            isError = isError,
+            isError = error != "",
             keyboardOptions = KeyboardOptions(
                 keyboardType = keyBoardType
             ),
@@ -65,7 +64,7 @@ fun UnderlinedTextField(
             } else {
                 VisualTransformation.None
             },
-            singleLine = true,
+            singleLine = isSingleLine,
             trailingIcon = {
                 if (isPasswordToggleDisplayed) {
                     IconButton(onClick = {
@@ -87,5 +86,15 @@ fun UnderlinedTextField(
                 }
             }
         )
+        if (error.isNotEmpty()) {
+            Text(
+                text = error,
+                style = MaterialTheme.typography.body2,
+                color = MaterialTheme.colors.error,
+                textAlign = TextAlign.End,
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
+        }
     }
 }
