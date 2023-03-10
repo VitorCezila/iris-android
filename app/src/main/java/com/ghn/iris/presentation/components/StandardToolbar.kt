@@ -38,11 +38,15 @@ fun StandardToolbar(
                 customBackAction()
             }
         } else if (showBackArrow) {
-            IconButton(onClick = { onNavigateUp() }) {
-                Icon(
-                    imageVector = Icons.Default.ArrowBack,
-                    contentDescription = "Back"
-                )
+            SimpleCircleBorder(
+                modifier = Modifier.size(36.dp)
+            ) {
+                IconButton(onClick = { onNavigateUp() }) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Back"
+                    )
+                }
             }
         }
 
