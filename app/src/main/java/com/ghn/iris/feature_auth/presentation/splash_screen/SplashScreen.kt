@@ -16,19 +16,20 @@ import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.ghn.iris.core.presentation.ui.theme.GradientBrush
-import com.ghn.iris.core.presentation.util.Screen
-import com.ghn.iris.core.util.Constants
+import com.ghn.iris.core.presentation.util.UiEvent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.withContext
 
 @Composable
 fun SplashScreen(
-    navController: NavController,
-    dispatcher: CoroutineDispatcher = Dispatchers.Main
+    dispatcher: CoroutineDispatcher = Dispatchers.Main,
+    onPopBackStack: () -> Unit = {},
+    onNavigate: (String) -> Unit = {},
+    viewModel: SplashViewModel = hiltViewModel()
 ) {
     val scale = remember {
         Animatable(0f)
@@ -41,15 +42,23 @@ fun SplashScreen(
             scale.animateTo(
                 targetValue = 0.5f,
                 animationSpec = tween(
-                    durationMillis = 1000,
+                    durationMillis = 500,
                     easing = {
                         overshootInterpolator.getInterpolation(it)
                     }
                 )
             )
-            delay(Constants.SPLASH_SCREEN_DURATION)
-            navController.popBackStack()
-            navController.navigate(Screen.LoginScreen.route)
+        }
+    }
+    LaunchedEffect(key1 = true) {
+        viewModel.eventFlow.collectLatest { event ->
+            when(event) {
+                is UiEvent.Navigate -> {
+                    onPopBackStack()
+                    onNavigate(event.route)
+                }
+                else -> Unit
+            }
         }
     }
     Box(
