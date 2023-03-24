@@ -39,7 +39,11 @@ fun Navigation(
             LoginScreen(navController = navController)
         }
         composable(Screen.RegisterScreen.route) {
-            RegisterScreen(navController = navController)
+            RegisterScreen(
+                navController = navController,
+                scaffoldState = scaffoldState,
+                onPopBackStack = navController::popBackStack
+            )
         }
         composable(Screen.HomeScreen.route) {
             HomeScreen(
