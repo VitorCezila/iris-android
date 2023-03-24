@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import com.ghn.iris.feature_auth.data.remote.AuthApi
 import com.ghn.iris.feature_auth.data.repository.AuthRepositoryImpl
 import com.ghn.iris.feature_auth.domain.repository.AuthRepository
+import com.ghn.iris.feature_auth.domain.use_case.AuthenticateUseCase
 import com.ghn.iris.feature_auth.domain.use_case.LoginUseCase
 import com.ghn.iris.feature_auth.domain.use_case.RegisterUseCase
 import dagger.Module
@@ -46,5 +47,11 @@ object AuthModule {
     @Singleton
     fun provideLoginUseCase(repository: AuthRepository): LoginUseCase {
         return LoginUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthenticateUseCase(repository: AuthRepository): AuthenticateUseCase {
+        return AuthenticateUseCase(repository)
     }
 }

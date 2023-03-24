@@ -33,7 +33,10 @@ fun Navigation(
         modifier = Modifier.fillMaxSize()
     ) {
         composable(Screen.SplashScreen.route) {
-            SplashScreen(navController)
+            SplashScreen(
+                onPopBackStack = navController::popBackStack,
+                onNavigate = navController::navigate,
+            )
         }
         composable(Screen.LoginScreen.route) {
             LoginScreen(

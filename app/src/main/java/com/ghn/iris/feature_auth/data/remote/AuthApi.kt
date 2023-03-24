@@ -5,6 +5,7 @@ import com.ghn.iris.feature_auth.data.remote.request.CreateAccountRequest
 import com.ghn.iris.feature_auth.data.remote.request.LoginRequest
 import com.ghn.iris.feature_auth.data.remote.response.AuthResponse
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface AuthApi {
@@ -18,6 +19,9 @@ interface AuthApi {
     suspend fun login(
         @Body request: LoginRequest
     ): BasicApiResponse<AuthResponse>
+
+    @GET("/user/authenticate")
+    suspend fun authenticate()
 
     companion object {
         const val BASE_URL = "http://192.168.15.20:8080"
