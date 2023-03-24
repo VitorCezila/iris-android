@@ -38,7 +38,7 @@ fun SearchScreen(
                     StandardTextFieldState(text = it)
                 )
             },
-            isError = viewModel.searchState.value.error.isNotEmpty(),
+            isError = viewModel.searchState.value.error != null,
             placeholder = {
                 Text(text = stringResource(R.string.search_for_people))
             },
@@ -63,9 +63,9 @@ fun SearchScreen(
                 .height(55.dp)
                 .fillMaxWidth()
         )
-        if (viewModel.searchState.value.error.isNotEmpty()) {
+        if (viewModel.searchState.value.error != null) {
             Text(
-                text = viewModel.searchState.value.error,
+                text = "",
                 style = MaterialTheme.typography.body2,
                 color = MaterialTheme.colors.error,
                 textAlign = TextAlign.End,

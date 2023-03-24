@@ -11,4 +11,8 @@ object Constants {
     val NotificationBodySize = 50.dp
     val NotificationIconSize = 18.dp
 
+    const val MIN_USERNAME_LENGTH = 6
+    const val MIN_PASSWORD_LENGTH = 6
+
+    const val KEY_JWT_TOKEN = "jwt_token"
 }

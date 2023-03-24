@@ -62,7 +62,7 @@ fun EditProfileScreen(
                 modifier = Modifier
                     .weight(1f),
                 text = viewModel.usernameState.value.text,
-                error = viewModel.usernameState.value.error,
+                error = "",
                 onValueChange = {
                     viewModel.setUsernameState(StandardTextFieldState(text = it))
                 },
@@ -86,7 +86,7 @@ fun EditProfileScreen(
                 modifier = Modifier
                     .weight(1f),
                 text = viewModel.bioState.value.text,
-                error = viewModel.bioState.value.error,
+                error = "",
                 isSingleLine = false,
                 onValueChange = {
                     viewModel.setBioState(StandardTextFieldState(text = it))
