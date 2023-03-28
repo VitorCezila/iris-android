@@ -10,17 +10,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.ghn.iris.core.domain.models.Post
+import coil.ImageLoader
 import com.ghn.iris.core.domain.models.User
 import com.ghn.iris.core.presentation.components.Post
+import com.ghn.iris.core.presentation.ui.theme.DarkGray
+import com.ghn.iris.core.presentation.ui.theme.ProfilePictureSizeLarge
+import com.ghn.iris.core.presentation.util.Screen
 import com.ghn.iris.feature_profile.presentation.profile_screen.components.BannerSection
 import com.ghn.iris.feature_profile.presentation.profile_screen.components.ProfileHeaderSection
-import com.ghn.iris.core.presentation.ui.theme.DarkGray
-import com.ghn.iris.core.presentation.util.Screen
-import com.ghn.iris.core.util.Constants.ProfilePictureSizeLarge
 
 @Composable
 fun ProfileScreen(
+    imageLoader: ImageLoader,
     onNavigate: (String) -> Unit = {},
     onNavigateUp: () -> Unit = {},
     viewModel: ProfileViewModel = hiltViewModel(),
@@ -49,7 +50,8 @@ fun ProfileScreen(
             }
             items(5) {
                 Post(
-                    mockPost,
+                    imageLoader = imageLoader,
+                    post = mockPost,
                     onPostClicked = {
                         onNavigate(Screen.PostDetailScreen.route)
                     }
@@ -70,7 +72,7 @@ private val mockUser = User(
     postCount = 5
 )
 
-private val mockPost = Post(
+private val mockPost = com.ghn.iris.core.domain.models.Post(
     id = "0",
     userId = "0",
     username = "cezila",

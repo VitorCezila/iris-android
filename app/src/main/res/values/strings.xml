@@ -43,5 +43,9 @@
     <string name="invalid_password">The password needs to contain at least one uppercase letter and one number</string>
     <string name="error_couldnt_reach_server">\Oops! Couldn\'t reach server. Check your internet connection.\</string>
     <string name="oops_something_went_wrong">\Oops! Something went wrong. Please try again.\</string>
+    <string name="successfully_deleted_post">Successfully deleted post</string>
+    <string name="error_no_image_picked">Please pick a photo</string>
+    <string name="error_description_blank">The description can\\\'t be empty</string>
+    <string name="share_intent_text">Hey, I found a great post, check it out :)\\n%s</string>
 
 </resources>

@@ -2,7 +2,13 @@ package com.ghn.iris.feature_post.presentation.post_detail_screen.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -20,9 +26,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.ghn.iris.R
-import com.ghn.iris.core.presentation.ui.theme.*
 import com.ghn.iris.core.domain.models.Comment
-import com.ghn.iris.core.util.Constants
+import com.ghn.iris.core.presentation.ui.theme.DarkBlack
+import com.ghn.iris.core.presentation.ui.theme.LightGray
+import com.ghn.iris.core.presentation.ui.theme.ProfilePictureSize
+import com.ghn.iris.core.presentation.ui.theme.SocialPink
+import com.ghn.iris.core.presentation.ui.theme.SocialWhite
+import com.ghn.iris.core.presentation.ui.theme.SpaceMedium
 
 @Composable
 fun Comment(
@@ -43,7 +53,7 @@ fun Comment(
                 painterResource(id = R.drawable.sheep),
                 contentDescription = "Profile picture",
                 modifier = Modifier
-                    .size(Constants.ProfilePictureSize)
+                    .size(ProfilePictureSize)
                     .clip(RoundedCornerShape(25.dp))
             )
             Spacer(modifier = Modifier.width(16.dp))

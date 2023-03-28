@@ -14,11 +14,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ghn.iris.R
-import com.ghn.iris.core.presentation.ui.theme.*
-import com.ghn.iris.core.presentation.components.StandardToolbar
-import com.ghn.iris.feature_post.presentation.create_post_screen.components.RowFiles
 import com.ghn.iris.core.domain.states.StandardTextFieldState
+import com.ghn.iris.core.presentation.components.StandardToolbar
+import com.ghn.iris.core.presentation.ui.theme.*
 import com.ghn.iris.core.util.Constants
+import com.ghn.iris.feature_post.presentation.create_post_screen.components.RowFiles
 
 @Composable
 fun CreatePostScreen(
@@ -68,7 +68,7 @@ fun CreatePostScreen(
                 painterResource(id = R.drawable.sheep),
                 contentDescription = "Profile picture",
                 modifier = Modifier
-                    .size(Constants.ProfilePictureSize)
+                    .size(ProfilePictureSize)
                     .clip(CircleShape)
             )
             Spacer(modifier = Modifier.width(8.dp))

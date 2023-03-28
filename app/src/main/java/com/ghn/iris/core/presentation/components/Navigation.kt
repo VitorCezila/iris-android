@@ -7,25 +7,27 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.ghn.iris.core.presentation.util.Screen
+import coil.ImageLoader
 import com.ghn.iris.core.domain.models.Post
 import com.ghn.iris.core.domain.models.Profile
-import com.ghn.iris.feature_post.presentation.create_post_screen.CreatePostScreen
-import com.ghn.iris.feature_profile.presentation.edit_profile_screen.EditProfileScreen
-import com.ghn.iris.feature_post.presentation.home_screen.HomeScreen
+import com.ghn.iris.core.presentation.util.Screen
 import com.ghn.iris.feature_auth.presentation.login_screen.LoginScreen
+import com.ghn.iris.feature_auth.presentation.register_screen.RegisterScreen
+import com.ghn.iris.feature_auth.presentation.splash_screen.SplashScreen
 import com.ghn.iris.feature_chat.presentation.message_screen.MessagesScreen
 import com.ghn.iris.feature_notification.presentation.NotificationScreen
+import com.ghn.iris.feature_post.presentation.create_post_screen.CreatePostScreen
+import com.ghn.iris.feature_post.presentation.home_screen.HomeScreen
 import com.ghn.iris.feature_post.presentation.post_detail_screen.PostDetailScreen
+import com.ghn.iris.feature_profile.presentation.edit_profile_screen.EditProfileScreen
 import com.ghn.iris.feature_profile.presentation.profile_screen.ProfileScreen
-import com.ghn.iris.feature_auth.presentation.register_screen.RegisterScreen
 import com.ghn.iris.feature_profile.presentation.search_screen.SearchScreen
-import com.ghn.iris.feature_auth.presentation.splash_screen.SplashScreen
 
 @Composable
 fun Navigation(
     navController: NavHostController,
-    scaffoldState: ScaffoldState
+    scaffoldState: ScaffoldState,
+    imageLoader: ImageLoader
 ) {
     NavHost(
         navController = navController,
@@ -61,7 +63,9 @@ fun Navigation(
         composable(Screen.HomeScreen.route) {
             HomeScreen(
                 onNavigateUp = navController::navigateUp,
-                onNavigate = navController::navigate
+                onNavigate = navController::navigate,
+                scaffoldState = scaffoldState,
+                imageLoader = imageLoader
             )
         }
         composable(Screen.SearchScreen.route) {
@@ -75,6 +79,7 @@ fun Navigation(
         }
         composable(Screen.ProfileScreen.route) {
             ProfileScreen(
+                imageLoader = imageLoader,
                 onNavigateUp = navController::navigateUp,
                 onNavigate = navController::navigate
             )

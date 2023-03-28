@@ -26,8 +26,6 @@ import com.ghn.iris.core.presentation.ui.theme.*
 import com.ghn.iris.core.domain.models.Notification
 import com.ghn.iris.core.domain.util.NotificationAction
 import com.ghn.iris.core.presentation.util.Screen
-import com.ghn.iris.core.util.Constants.NotificationBodySize
-import com.ghn.iris.core.util.Constants.NotificationIconSize
 
 @Composable
 fun NotificationItem(

@@ -1,8 +1,22 @@
 package com.ghn.iris.feature_profile.presentation.edit_profile_screen
 
-import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
@@ -20,11 +34,15 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ghn.iris.R
-import com.ghn.iris.core.presentation.ui.theme.*
 import com.ghn.iris.core.domain.models.Profile
-import com.ghn.iris.core.presentation.components.UnderlinedTextField
 import com.ghn.iris.core.domain.states.StandardTextFieldState
-import com.ghn.iris.core.util.Constants.ProfilePictureSizeLarge
+import com.ghn.iris.core.presentation.components.UnderlinedTextField
+import com.ghn.iris.core.presentation.ui.theme.ProfilePictureSizeLarge
+import com.ghn.iris.core.presentation.ui.theme.SocialPink
+import com.ghn.iris.core.presentation.ui.theme.SocialWhite
+import com.ghn.iris.core.presentation.ui.theme.SpaceLarge
+import com.ghn.iris.core.presentation.ui.theme.SpaceSmall
+import com.ghn.iris.core.presentation.ui.theme.White
 
 @Composable
 fun EditProfileScreen(
