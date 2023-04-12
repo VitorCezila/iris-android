@@ -47,10 +47,10 @@ class PostRepositoryImpl(
 
     override suspend fun createPost(
         description: String,
-        imageUri: Uri
+        imageUri: Uri?
     ): SimpleResource {
         val request = CreatePostRequest(description)
-        val file = imageUri.toFile()
+        val file = imageUri?.toFile()
         return try {
             val response = api.createPost(
                 postData = MultipartBody.Part
@@ -58,12 +58,15 @@ class PostRepositoryImpl(
                         "post_data",
                         gson.toJson(request)
                     ),
-                postImage = MultipartBody.Part
-                    .createFormData(
-                        name = "post_image",
-                        filename = file.name,
-                        body = file.asRequestBody()
-                    )
+                postImage = if(file != null) {
+                    MultipartBody.Part
+                        .createFormData(
+                            name = "post_image",
+                            filename = file.name,
+                            body = file.asRequestBody()
+                        )
+                } else
+                    null
             )
             if (response.successful) {
                 Resource.Success(Unit)

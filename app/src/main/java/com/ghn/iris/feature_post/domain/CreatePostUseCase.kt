@@ -15,14 +15,9 @@ class CreatePostUseCase(
         description: String,
         imageUri: Uri?
     ): SimpleResource {
-        if(imageUri == null) {
+        if(imageUri == null && description.isBlank()) {
             return Resource.Error(
-                uiText = UiText.StringResource(R.string.error_no_image_picked)
-            )
-        }
-        if(description.isBlank()) {
-            return Resource.Error(
-                uiText = UiText.StringResource(R.string.error_description_blank)
+                uiText = UiText.StringResource(R.string.error_no_image_picked_no_text)
             )
         }
         return repository.createPost(description, imageUri)

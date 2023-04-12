@@ -123,7 +123,7 @@ fun LoginScreen(
                     is AuthError.FieldEmpty -> stringResource(id = R.string.error_field_empty)
                     else -> ""
                 },
-                showPasswordToggle = passwordState.isPasswordVisible,
+                showPasswordToggle = state.isPasswordVisible,
                 onPasswordToggleClick = {
                     viewModel.onEvent(LoginEvent.TogglePasswordVisibility)
                 }

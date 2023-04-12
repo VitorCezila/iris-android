@@ -2,7 +2,6 @@ package com.ghn.iris.feature_post.data.remote
 
 import com.ghn.iris.core.data.dto.response.BasicApiResponse
 import com.ghn.iris.core.data.dto.response.UserItemDto
-import com.ghn.iris.core.domain.models.Post
 import com.ghn.iris.feature_post.data.remote.dto.CommentDto
 import com.ghn.iris.feature_post.data.remote.dto.PostDto
 import com.ghn.iris.feature_post.data.remote.request.CreateCommentRequest
@@ -28,8 +27,8 @@ interface PostApi {
     @Multipart
     @POST("/post/create")
     suspend fun createPost(
-        @Part postData: MultipartBody.Part,
-        @Part postImage: MultipartBody.Part
+        @Part postData: MultipartBody.Part?,
+        @Part postImage: MultipartBody.Part?
     ): BasicApiResponse<Unit>
 
     @GET("/post/details")

@@ -11,7 +11,7 @@ interface PostRepository {
 
     suspend fun getPostsForFollows(page: Int, pageSize: Int): Resource<List<Post>>
 
-    suspend fun createPost(description: String, imageUri: Uri): SimpleResource
+    suspend fun createPost(description: String, imageUri: Uri?): SimpleResource
 
     suspend fun getPostDetails(postId: String): Resource<Post>
 

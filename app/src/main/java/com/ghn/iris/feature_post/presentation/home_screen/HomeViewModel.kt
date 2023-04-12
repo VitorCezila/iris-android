@@ -33,7 +33,7 @@ class HomeViewModel @Inject constructor(
     private val _pagingState = mutableStateOf<PagingState<Post>>(PagingState())
     val pagingState: State<PagingState<Post>> = _pagingState
 
-    private val paginator = DefaultPaginator(
+    private val paginator = DefaultPaginator<Post>(
         onLoadUpdated = { isLoading ->
             _pagingState.value = pagingState.value.copy(
                 isLoading = isLoading

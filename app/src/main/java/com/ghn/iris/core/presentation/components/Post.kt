@@ -1,6 +1,5 @@
 package com.ghn.iris.core.presentation.components
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -14,9 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -33,18 +30,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.ImageLoader
-import coil.compose.AsyncImage
-import coil.compose.SubcomposeAsyncImage
-import coil.compose.rememberAsyncImagePainter
-import coil.compose.rememberImagePainter
-import coil.request.ImageRequest
-import com.ghn.iris.R
 import com.ghn.iris.core.domain.models.Post
 import com.ghn.iris.core.presentation.ui.theme.DarkBlack
 import com.ghn.iris.core.presentation.ui.theme.LightGray
@@ -52,7 +40,7 @@ import com.ghn.iris.core.presentation.ui.theme.ProfilePictureSize
 import com.ghn.iris.core.presentation.ui.theme.SocialPink
 import com.ghn.iris.core.presentation.ui.theme.SocialWhite
 import com.ghn.iris.core.presentation.ui.theme.White
-import timber.log.Timber
+import com.ghn.iris.core.util.base64ToImageBitmap
 
 @Composable
 fun Post(
@@ -66,6 +54,10 @@ fun Post(
     onSaveClicked: () -> Unit = {},
     onDeleteClick: () -> Unit = {}
 ) {
+
+    val profilePictureBitMap = post.profileImageBase64?.base64ToImageBitmap()
+    val postImageBitMap = post.imageBase64?.base64ToImageBitmap()
+
     Column(
         modifier = Modifier
             .padding(16.dp)
@@ -75,17 +67,16 @@ fun Post(
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
-                painter = rememberAsyncImagePainter(
-                    model = post.profilePictureUrl,
-                    imageLoader = imageLoader
-                ),
-                contentDescription = "Profile picture",
-                modifier = Modifier
-                    .size(ProfilePictureSize)
-                    .clip(RoundedCornerShape(25.dp))
-                    .clickable { onUserClicked() }
-            )
+            if(profilePictureBitMap != null) {
+                Image(
+                    bitmap = profilePictureBitMap,
+                    contentDescription = "Profile picture",
+                    modifier = Modifier
+                        .size(ProfilePictureSize)
+                        .clip(RoundedCornerShape(25.dp))
+                        .clickable { onUserClicked() }
+                )
+            }
             Spacer(modifier = Modifier.width(16.dp))
             Column(
                 modifier = Modifier.weight(1f),
@@ -118,18 +109,17 @@ fun Post(
                 color = SocialWhite
             )
             Spacer(modifier = Modifier.height(16.dp))
-            Image(
-                painter = rememberAsyncImagePainter(
-                    model = post.imageUrl,
-                    imageLoader = imageLoader
-                ),
-                contentDescription = "Post image",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1f)
-                    .clip(RoundedCornerShape(16.dp)),
-                contentScale = ContentScale.Crop,
-            )
+            if(postImageBitMap != null) {
+                Image(
+                    bitmap = postImageBitMap,
+                    contentDescription = "Post image",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(1f)
+                        .clip(RoundedCornerShape(16.dp)),
+                    contentScale = ContentScale.Crop,
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(16.dp))
