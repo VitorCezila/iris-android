@@ -1,7 +1,6 @@
 package com.ghn.iris.core.presentation
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,9 +19,8 @@ import coil.annotation.ExperimentalCoilApi
 import com.ghn.iris.core.presentation.components.Navigation
 import com.ghn.iris.core.presentation.components.StandardScaffold
 import com.ghn.iris.core.presentation.ui.theme.IrisTheme
-import com.ghn.iris.core.presentation.util.Screen
+import com.ghn.iris.core.util.Screen
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import javax.inject.Inject
 
 @ExperimentalComposeUiApi

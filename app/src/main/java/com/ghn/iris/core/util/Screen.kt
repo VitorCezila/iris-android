@@ -1,4 +1,4 @@
-package com.ghn.iris.core.presentation.util
+package com.ghn.iris.core.util
 
 sealed class Screen(val route: String) {
     object SplashScreen : Screen("splash_screen")

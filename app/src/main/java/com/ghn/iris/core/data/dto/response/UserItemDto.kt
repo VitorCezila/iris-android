@@ -5,7 +5,7 @@ import com.ghn.iris.core.domain.models.UserItem
 data class UserItemDto(
     val userId: String,
     val username: String,
-    val profilePictureUrl: String,
+    val profilePictureBase64: String,
     val bio: String,
     val isFollowing: Boolean
 ) {
@@ -13,7 +13,7 @@ data class UserItemDto(
         return UserItem(
             userId = userId,
             username = username,
-            profilePictureUrl = profilePictureUrl,
+            profilePictureBase64 = profilePictureBase64,
             bio = bio,
             isFollowing = isFollowing
         )

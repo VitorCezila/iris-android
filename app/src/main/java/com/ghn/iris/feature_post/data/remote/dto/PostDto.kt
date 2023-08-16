@@ -9,7 +9,7 @@ data class PostDto(
     val id: String,
     val userId: String,
     val username: String,
-    val profileImageBase64: String?,
+    val profilePictureBase64: String?,
     val content: String?,
     val imageBase64: String?,
     val timestamp: Long,
@@ -24,7 +24,7 @@ data class PostDto(
             id = id,
             userId = userId,
             username = username,
-            profileImageBase64 = profileImageBase64,
+            profilePictureBase64 = profilePictureBase64,
             content = content ?: "",
             imageBase64 = imageBase64,
             formattedTime = SimpleDateFormat("MMM dd, HH:mm", Locale.getDefault()).run {

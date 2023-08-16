@@ -4,7 +4,7 @@ data class Post(
     val id: String,
     val userId: String,
     val username: String,
-    val profileImageBase64: String?,
+    val profilePictureBase64: String?,
     val content: String,
     val imageBase64: String?,
     val formattedTime: String,

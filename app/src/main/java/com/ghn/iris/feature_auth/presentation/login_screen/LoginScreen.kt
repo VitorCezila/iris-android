@@ -13,11 +13,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.ghn.iris.R
 import com.ghn.iris.core.presentation.ui.theme.*
 import com.ghn.iris.core.presentation.components.UnderlinedTextField
-import com.ghn.iris.core.presentation.util.Screen
+import com.ghn.iris.core.util.Screen
 import com.ghn.iris.core.presentation.util.UiEvent
 import com.ghn.iris.core.presentation.util.asString
 import com.ghn.iris.feature_auth.presentation.util.AuthError

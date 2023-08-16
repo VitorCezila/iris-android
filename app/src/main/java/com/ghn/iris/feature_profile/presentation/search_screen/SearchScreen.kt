@@ -107,7 +107,7 @@ fun SearchScreen(
 private val mockUser = UserItem(
     userId = "teste",
     username = "cezila",
-    profilePictureUrl = "",
+    profilePictureBase64 = "",
     bio = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a sem quam. Integer placerat efficitur mattis. Ut magna nunc, dictum rutrum augue ut, condimentum sollicitudin nisl. In est turpis, egestas in ex eu.",
     isFollowing = true
 )

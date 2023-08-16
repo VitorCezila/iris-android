@@ -47,5 +47,7 @@
     <string name="error_no_image_picked_no_text">Please pick a photo or a text</string>
     <string name="error_description_blank">The description can\\\'t be empty</string>
     <string name="share_intent_text">Hey, I found a great post, check it out :)\\n%s</string>
+    <string name="error_not_logged_in">Please login before doing that</string>
+    <string name="comment_posted">Successfully posted comment</string>
 
 </resources>

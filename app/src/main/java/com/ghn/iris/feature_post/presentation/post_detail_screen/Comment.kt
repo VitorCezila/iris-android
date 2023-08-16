@@ -1,4 +1,4 @@
-package com.ghn.iris.feature_post.presentation.post_detail_screen.components
+package com.ghn.iris.feature_post.presentation.post_detail_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
