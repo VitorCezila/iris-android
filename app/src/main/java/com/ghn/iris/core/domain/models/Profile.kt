@@ -8,7 +8,7 @@ data class Profile(
     val followingCount: Int,
     val postCount: Int,
     val profileImageBase64: String,
-    val bannerBase64: String?,
+    val profileBannerBase64: String?,
     val isOwnProfile: Boolean,
     val isFollowing: Boolean
 )

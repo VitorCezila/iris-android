@@ -1,16 +1,19 @@
 package com.ghn.iris.core.presentation.components
 
+import android.content.Intent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
 import coil.ImageLoader
-import com.ghn.iris.core.domain.models.Post
 import com.ghn.iris.core.domain.models.Profile
-import com.ghn.iris.core.presentation.util.Screen
+import com.ghn.iris.core.util.Screen
 import com.ghn.iris.feature_auth.presentation.login_screen.LoginScreen
 import com.ghn.iris.feature_auth.presentation.register_screen.RegisterScreen
 import com.ghn.iris.feature_auth.presentation.splash_screen.SplashScreen
@@ -93,26 +96,35 @@ fun Navigation(
         composable(Screen.MessagesScreen.route) {
             MessagesScreen()
         }
-        composable(Screen.PostDetailScreen.route) {
-            val mockPost = Post(
-                id = "0",
-                userId = "0",
-                username = "cezila",
-                profileImageBase64 = "",
-                content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a sem quam. Integer placerat efficitur mattis. Ut magna nunc, dictum rutrum augue ut, condimentum sollicitudin nisl. In est turpis, egestas in ex eu.",
-                imageBase64 = "",
-                formattedTime = "1 hour ago",
-                likeCount = 10,
-                commentCount = 15,
-                sharesCount = 0,
-                isLiked = true,
-                isSaved = false,
-                isOwnPost = true
+        composable(
+            route = Screen.PostDetailScreen.route + "/{postId}?shouldShowKeyboard={shouldShowKeyboard}",
+            arguments = listOf(
+                navArgument(
+                    name = "postId"
+                ) {
+                    type = NavType.StringType
+                },
+                navArgument(
+                    name = "shouldShowKeyboard"
+                ) {
+                    type = NavType.BoolType
+                    defaultValue = false
+                }
+            ),
+            deepLinks = listOf(
+                navDeepLink {
+                    action = Intent.ACTION_VIEW
+                    uriPattern = "https://pl-coding.com/{postId}"
+                }
             )
+        ) {
+            val shouldShowKeyboard = it.arguments?.getBoolean("shouldShowKeyboard") ?: false
+            println("POST ID: ${it.arguments?.getString("postId")}")
             PostDetailScreen(
+                scaffoldState = scaffoldState,
                 onNavigateUp = navController::navigateUp,
                 onNavigate = navController::navigate,
-                post = mockPost
+                shouldShowKeyboard = shouldShowKeyboard,
             )
         }
         composable(Screen.EditProfileScreen.route) {
@@ -120,7 +132,7 @@ fun Navigation(
                 userId = "0",
                 username = "cezila",
                 profileImageBase64 = "",
-                bannerBase64 = "",
+                profileBannerBase64 = "",
                 bio = "Writer by Profession. Artist by Passion!",
                 followerCount = 2467,
                 followingCount = 1589,

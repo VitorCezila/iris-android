@@ -32,7 +32,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import coil.ImageLoader
 import com.ghn.iris.core.domain.models.Post
 import com.ghn.iris.core.presentation.ui.theme.DarkBlack
 import com.ghn.iris.core.presentation.ui.theme.LightGray
@@ -45,7 +44,6 @@ import com.ghn.iris.core.util.base64ToImageBitmap
 @Composable
 fun Post(
     post: Post,
-    imageLoader: ImageLoader,
     onPostClicked: () -> Unit = {},
     onLikeClicked: () -> Unit = {},
     onCommentClicked: () -> Unit = {},
@@ -55,7 +53,7 @@ fun Post(
     onDeleteClick: () -> Unit = {}
 ) {
 
-    val profilePictureBitMap = post.profileImageBase64?.base64ToImageBitmap()
+    val profilePictureBitMap = post.profilePictureBase64?.base64ToImageBitmap()
     val postImageBitMap = post.imageBase64?.base64ToImageBitmap()
 
     Column(

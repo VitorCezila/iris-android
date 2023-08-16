@@ -7,7 +7,7 @@ import java.util.*
 data class CommentDto(
     val id: String,
     val username: String,
-    val profilePictureUrl: String,
+    val profilePictureBase64: String,
     val timestamp: Long,
     val comment: String,
     val isLiked: Boolean,
@@ -17,7 +17,7 @@ data class CommentDto(
         return Comment(
             id = id,
             username = username,
-            profilePictureUrl = profilePictureUrl,
+            profilePictureBase64 = profilePictureBase64,
             formattedTime = SimpleDateFormat("MMM dd, HH:mm", Locale.getDefault()).run {
                 format(timestamp)
             },

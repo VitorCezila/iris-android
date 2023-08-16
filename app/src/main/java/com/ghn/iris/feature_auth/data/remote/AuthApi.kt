@@ -25,5 +25,6 @@ interface AuthApi {
 
     companion object {
         const val BASE_URL = "http://192.168.15.20:8080"
+        const val BASE_URL_PROD = "https://iris-api.herokuapp.com"
     }
 }

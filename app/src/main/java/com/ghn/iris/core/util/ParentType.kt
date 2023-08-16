@@ -1,4 +1,4 @@
-package com.ghn.iris.core.presentation.util
+package com.ghn.iris.core.util
 
 sealed class ParentType(val type: Int) {
     object Post : ParentType(0)

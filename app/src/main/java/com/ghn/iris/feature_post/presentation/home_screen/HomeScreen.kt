@@ -28,7 +28,7 @@ import com.ghn.iris.core.presentation.components.SimpleCircleBorder
 import com.ghn.iris.core.presentation.components.StandardToolbar
 import com.ghn.iris.core.presentation.ui.theme.SpaceLarge
 import com.ghn.iris.core.presentation.ui.theme.White
-import com.ghn.iris.core.presentation.util.Screen
+import com.ghn.iris.core.util.Screen
 import com.ghn.iris.core.util.sendSharePostIntent
 import kotlinx.coroutines.flow.collectLatest
 
@@ -92,26 +92,24 @@ fun HomeScreen(
                     }
                     Post(
                         post = post,
-                        imageLoader = imageLoader,
-                        onUserClicked = {
-                            onNavigate(Screen.ProfileScreen.route + "?userId=${post.userId}")
-                        },
                         onPostClicked = {
                             onNavigate(Screen.PostDetailScreen.route + "/${post.id}")
-                        },
-                        onCommentClicked = {
-                            onNavigate(Screen.PostDetailScreen.route + "/${post.id}?shouldShowKeyboard=true")
                         },
                         onLikeClicked = {
                             viewModel.onEvent(HomeEvent.LikedPost(post.id))
                         },
+                        onCommentClicked = {
+                            onNavigate(Screen.PostDetailScreen.route + "/${post.id}?shouldShowKeyboard=true")
+                        },
                         onShareClicked = {
                             context.sendSharePostIntent(post.id)
                         },
-                        onDeleteClick = {
-                            viewModel.onEvent(HomeEvent.DeletePost(post))
+                        onUserClicked = {
+                            onNavigate(Screen.ProfileScreen.route + "?userId=${post.userId}")
                         }
-                    )
+                    ) {
+                        viewModel.onEvent(HomeEvent.DeletePost(post))
+                    }
                     if (i < pagingState.items.size - 1) {
                         Spacer(modifier = Modifier.height(SpaceLarge))
                     }

@@ -2,8 +2,7 @@ package com.ghn.iris.feature_auth.presentation.splash_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.ghn.iris.core.presentation.util.Screen
+import com.ghn.iris.core.util.Screen
 import com.ghn.iris.core.presentation.util.UiEvent
 import com.ghn.iris.core.util.Resource
 import com.ghn.iris.feature_auth.domain.use_case.AuthenticateUseCase

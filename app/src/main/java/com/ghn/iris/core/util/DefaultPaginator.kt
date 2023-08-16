@@ -1,7 +1,4 @@
-package com.ghn.iris.core.presentation.util
-
-import com.ghn.iris.core.util.Resource
-import com.ghn.iris.core.util.UiText
+package com.ghn.iris.core.util
 
 class DefaultPaginator<T>(
     private val onLoadUpdated: (Boolean) -> Unit,

@@ -15,7 +15,7 @@ import com.ghn.iris.core.domain.models.User
 import com.ghn.iris.core.presentation.components.Post
 import com.ghn.iris.core.presentation.ui.theme.DarkGray
 import com.ghn.iris.core.presentation.ui.theme.ProfilePictureSizeLarge
-import com.ghn.iris.core.presentation.util.Screen
+import com.ghn.iris.core.util.Screen
 import com.ghn.iris.feature_profile.presentation.profile_screen.components.BannerSection
 import com.ghn.iris.feature_profile.presentation.profile_screen.components.ProfileHeaderSection
 
@@ -50,7 +50,6 @@ fun ProfileScreen(
             }
             items(5) {
                 Post(
-                    imageLoader = imageLoader,
                     post = mockPost,
                     onPostClicked = {
                         onNavigate(Screen.PostDetailScreen.route)
@@ -76,7 +75,7 @@ private val mockPost = com.ghn.iris.core.domain.models.Post(
     id = "0",
     userId = "0",
     username = "cezila",
-    profileImageBase64 = "",
+    profilePictureBase64 = "",
     content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a sem quam. Integer placerat efficitur mattis. Ut magna nunc, dictum rutrum augue ut, condimentum sollicitudin nisl. In est turpis, egestas in ex eu.",
     imageBase64 = "",
     formattedTime = "1 hour ago",

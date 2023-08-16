@@ -1,4 +1,4 @@
-package com.ghn.iris.core.presentation.util
+package com.ghn.iris.core.util
 
 interface Paginator<T> {
 

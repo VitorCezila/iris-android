@@ -19,7 +19,7 @@ import com.ghn.iris.core.presentation.ui.theme.Black
 import com.ghn.iris.core.presentation.ui.theme.GradientBrush
 import com.ghn.iris.core.presentation.ui.theme.Transparent
 import com.ghn.iris.core.domain.models.BottomNavItem
-import com.ghn.iris.core.presentation.util.Screen
+import com.ghn.iris.core.util.Screen
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
