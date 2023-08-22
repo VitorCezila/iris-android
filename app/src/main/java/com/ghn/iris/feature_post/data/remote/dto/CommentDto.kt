@@ -9,7 +9,7 @@ data class CommentDto(
     val username: String,
     val profilePictureBase64: String,
     val timestamp: Long,
-    val comment: String,
+    val content: String,
     val isLiked: Boolean,
     val likeCount: Int
 ) {
@@ -21,7 +21,7 @@ data class CommentDto(
             formattedTime = SimpleDateFormat("MMM dd, HH:mm", Locale.getDefault()).run {
                 format(timestamp)
             },
-            comment = comment,
+            content = content,
             isLiked = isLiked,
             likeCount = likeCount
         )

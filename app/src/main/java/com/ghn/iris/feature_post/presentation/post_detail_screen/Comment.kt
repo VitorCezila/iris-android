@@ -65,7 +65,7 @@ fun Comment(
                     color = SocialWhite
                 )
                 Text(
-                    text = comment.comment,
+                    text = comment.content,
                     style = MaterialTheme.typography.body2,
                     color = SocialWhite
                 )

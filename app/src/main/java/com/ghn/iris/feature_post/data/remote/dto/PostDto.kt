@@ -1,9 +1,8 @@
 package com.ghn.iris.feature_post.data.remote.dto
 
 import com.ghn.iris.core.domain.models.Post
-import timber.log.Timber
 import java.text.SimpleDateFormat
-import java.util.Locale
+import java.util.*
 
 data class PostDto(
     val id: String,
@@ -19,7 +18,6 @@ data class PostDto(
     val isOwnPost: Boolean
 ) {
     fun toPost(): Post {
-        Timber.d("Post Received: $this")
         return Post(
             id = id,
             userId = userId,

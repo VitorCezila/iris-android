@@ -128,7 +128,7 @@ class PostRepositoryImpl(
         return try {
             val response = api.createComment(
                 CreateCommentRequest(
-                    comment = comment,
+                    content = comment,
                     postId = postId,
                 )
             )

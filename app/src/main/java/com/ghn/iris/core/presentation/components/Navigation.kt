@@ -80,7 +80,16 @@ fun Navigation(
         composable(Screen.NotificationScreen.route) {
             NotificationScreen()
         }
-        composable(Screen.ProfileScreen.route) {
+        composable(
+            route = Screen.ProfileScreen.route + "?userId={userId}",
+            arguments = listOf(
+                navArgument(name = "userId") {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                }
+            )
+        ) {
             ProfileScreen(
                 imageLoader = imageLoader,
                 onNavigateUp = navController::navigateUp,
@@ -119,7 +128,6 @@ fun Navigation(
             )
         ) {
             val shouldShowKeyboard = it.arguments?.getBoolean("shouldShowKeyboard") ?: false
-            println("POST ID: ${it.arguments?.getString("postId")}")
             PostDetailScreen(
                 scaffoldState = scaffoldState,
                 onNavigateUp = navController::navigateUp,

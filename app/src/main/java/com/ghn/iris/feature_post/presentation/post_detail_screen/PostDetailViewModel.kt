@@ -187,6 +187,7 @@ class PostDetailViewModel @Inject constructor(
                         text = "",
                         error = CommentError.FieldEmpty
                     )
+                    loadPostDetails(postId)
                     loadCommentsForPost(postId)
                 }
                 is Resource.Error -> {
