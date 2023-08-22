@@ -51,5 +51,8 @@
     <string name="comment_posted">Successfully posted comment</string>
     <string name="enter_a_comment">Enter a comment...</string>
     <string name="send_comment">Send comment</string>
+    <string name="post_created">Successfully created post</string>
+    <string name="post_image">Post image</string>
+    <string name="coming_soon">This feature is coming soon...</string>
 
 </resources>

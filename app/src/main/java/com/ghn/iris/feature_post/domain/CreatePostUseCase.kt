@@ -12,14 +12,14 @@ class CreatePostUseCase(
 ) {
 
     suspend operator fun invoke(
-        description: String,
+        content: String,
         imageUri: Uri?
     ): SimpleResource {
-        if(imageUri == null && description.isBlank()) {
+        if(imageUri == null && content.isBlank()) {
             return Resource.Error(
                 uiText = UiText.StringResource(R.string.error_no_image_picked_no_text)
             )
         }
-        return repository.createPost(description, imageUri)
+        return repository.createPost(content, imageUri)
     }
 }

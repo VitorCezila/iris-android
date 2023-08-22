@@ -1,4 +1,4 @@
-package com.ghn.iris.feature_post.presentation.create_post_screen.components
+package com.ghn.iris.feature_post.presentation.create_post_screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -18,7 +18,10 @@ import com.ghn.iris.core.presentation.ui.theme.SpaceSmall
 fun RowFiles(
     modifier: Modifier = Modifier,
     showMenu: Boolean = false,
-    onMenuClicked: () -> Unit = {}
+    onMenuClicked: () -> Unit = {},
+    onGalleryIsClicked: () -> Unit,
+    onCameraIsClicked: () -> Unit,
+    onGifIsClicked: () -> Unit
 ) {
 
     Row(
@@ -53,15 +56,21 @@ fun RowFiles(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                IconButton(onClick = { }) {
+                IconButton(onClick = {
+                    onGalleryIsClicked()
+                }) {
                     Icon(Icons.Filled.Image, contentDescription = "Image")
                 }
 
-                IconButton(onClick = { }) {
+                IconButton(onClick = {
+                    onCameraIsClicked()
+                }) {
                     Icon(Icons.Filled.CameraAlt, contentDescription = "Camera")
                 }
 
-                IconButton(onClick = { }) {
+                IconButton(onClick = {
+                    onGifIsClicked()
+                }) {
                     Icon(Icons.Filled.Gif, contentDescription = "Gif")
                 }
             }

@@ -46,10 +46,10 @@ class PostRepositoryImpl(
     }
 
     override suspend fun createPost(
-        description: String,
+        content: String,
         imageUri: Uri?
     ): SimpleResource {
-        val request = CreatePostRequest(description)
+        val request = CreatePostRequest(content)
         val file = imageUri?.toFile()
         return try {
             val response = api.createPost(
