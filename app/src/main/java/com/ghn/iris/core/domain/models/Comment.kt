@@ -5,7 +5,7 @@ data class Comment(
     val username: String,
     val profilePictureBase64: String,
     val formattedTime: String,
-    val comment: String,
+    val content: String,
     val isLiked: Boolean,
     val likeCount: Int
 )

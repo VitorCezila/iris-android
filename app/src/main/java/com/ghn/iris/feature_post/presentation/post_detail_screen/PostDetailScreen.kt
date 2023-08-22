@@ -1,12 +1,7 @@
 package com.ghn.iris.feature_post.presentation.post_detail_screen
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
@@ -25,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ghn.iris.R
 import com.ghn.iris.core.presentation.components.Post
+import com.ghn.iris.core.presentation.components.SendTextField
 import com.ghn.iris.core.presentation.components.StandardToolbar
 import com.ghn.iris.core.presentation.ui.theme.DarkBlack
 import com.ghn.iris.core.presentation.ui.theme.DarkGray
@@ -33,6 +29,8 @@ import com.ghn.iris.core.presentation.ui.theme.White
 import com.ghn.iris.core.presentation.util.UiEvent
 import com.ghn.iris.core.presentation.util.asString
 import com.ghn.iris.core.presentation.util.showKeyboard
+import com.ghn.iris.core.util.Screen
+import com.ghn.iris.core.util.sendSharePostIntent
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -102,6 +100,19 @@ fun PostDetailScreen(
                     state.post?.let { post ->
                         Post(
                             post = post,
+                            onLikeClicked = {
+                                viewModel.onEvent(PostDetailEvent.LikePost)
+                            },
+                            onCommentClicked = {
+                                context.showKeyboard()
+                                focusRequester.requestFocus()
+                            },
+                            onShareClicked = {
+                                context.sendSharePostIntent(post.id)
+                            },
+                            onUserClicked = {
+                                onNavigate(Screen.ProfileScreen.route + "?userId=${post.userId}")
+                            }
                         )
 
                         Divider(color = DarkGray, thickness = 3.dp)
@@ -109,7 +120,9 @@ fun PostDetailScreen(
 
                         Text(
                             text = "COMMENTS (${post.commentCount})",
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 16.dp, end = 16.dp)
                         )
 
                     }
@@ -125,5 +138,20 @@ fun PostDetailScreen(
                 )
             }
         }
+        SendTextField(
+            state = viewModel.commentTextFieldState.value,
+            onValueChange = {
+                viewModel.onEvent(PostDetailEvent.EnteredComment(it))
+            },
+            onSend = {
+                viewModel.onEvent(PostDetailEvent.Comment)
+            },
+            hint = stringResource(id = R.string.enter_a_comment),
+            isLoading = viewModel.commentState.value.isLoading,
+            focusRequester = focusRequester,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+        )
     }
 }
