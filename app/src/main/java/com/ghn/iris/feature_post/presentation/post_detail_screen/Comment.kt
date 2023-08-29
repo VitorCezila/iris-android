@@ -21,7 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -33,7 +33,6 @@ import com.ghn.iris.core.presentation.ui.theme.ProfilePictureSize
 import com.ghn.iris.core.presentation.ui.theme.SocialPink
 import com.ghn.iris.core.presentation.ui.theme.SocialWhite
 import com.ghn.iris.core.presentation.ui.theme.SpaceMedium
-import com.ghn.iris.core.util.base64ToImageBitmap
 
 @Composable
 fun Comment(
@@ -42,7 +41,7 @@ fun Comment(
     onLikeClick: (Boolean) -> Unit = {},
 ) {
 
-    val profilePictureBitMap = comment.profilePictureBase64.base64ToImageBitmap()
+    val profilePictureBitMap = comment.profilePictureBitmap
 
     Column(
         modifier = Modifier
@@ -55,7 +54,7 @@ fun Comment(
         ) {
             if(profilePictureBitMap != null) {
                 Image(
-                    bitmap = profilePictureBitMap,
+                    bitmap = profilePictureBitMap.asImageBitmap(),
                     contentDescription = "Profile picture",
                     modifier = Modifier
                         .size(ProfilePictureSize)

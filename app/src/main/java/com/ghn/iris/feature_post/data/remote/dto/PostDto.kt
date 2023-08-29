@@ -1,6 +1,7 @@
 package com.ghn.iris.feature_post.data.remote.dto
 
 import com.ghn.iris.core.domain.models.Post
+import com.ghn.iris.core.util.base64ToImageBitmap
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -22,9 +23,9 @@ data class PostDto(
             id = id,
             userId = userId,
             username = username,
-            profilePictureBase64 = profilePictureBase64,
+            profilePictureBitmap = profilePictureBase64?.base64ToImageBitmap(),
             content = content ?: "",
-            imageBase64 = imageBase64,
+            imageBitmap = imageBase64?.base64ToImageBitmap(),
             formattedTime = SimpleDateFormat("MMM dd, HH:mm", Locale.getDefault()).run {
                 format(timestamp)
             },

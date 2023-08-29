@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -32,7 +33,7 @@ fun BannerSection(
     ) {
         if(profileBannerBitMap != null) {
             Image(
-                bitmap = profileBannerBitMap,
+                bitmap = profileBannerBitMap.asImageBitmap(),
                 contentDescription = stringResource(R.string.banner_image),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier

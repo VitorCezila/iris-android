@@ -22,15 +22,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material.icons.filled.ChatBubble
-import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.DeleteOutline
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Share
-import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -42,7 +41,6 @@ import com.ghn.iris.core.presentation.ui.theme.ProfilePictureSize
 import com.ghn.iris.core.presentation.ui.theme.SocialPink
 import com.ghn.iris.core.presentation.ui.theme.SocialWhite
 import com.ghn.iris.core.presentation.ui.theme.White
-import com.ghn.iris.core.util.base64ToImageBitmap
 
 @Composable
 fun Post(
@@ -56,8 +54,8 @@ fun Post(
     onDeleteClick: () -> Unit = {}
 ) {
 
-    val profilePictureBitMap = post.profilePictureBase64?.base64ToImageBitmap()
-    val postImageBitMap = post.imageBase64?.base64ToImageBitmap()
+    val profilePictureBitMap = post.profilePictureBitmap?.asImageBitmap()
+    val postImageBitMap = post.imageBitmap?.asImageBitmap()
 
     Column(
         modifier = Modifier

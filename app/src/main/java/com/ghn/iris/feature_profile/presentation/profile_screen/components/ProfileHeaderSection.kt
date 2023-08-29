@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -49,7 +50,7 @@ fun ProfileHeaderSection(
     ) {
         if(profilePictureBitMap != null) {
             Image(
-                bitmap = profilePictureBitMap,
+                bitmap = profilePictureBitMap.asImageBitmap(),
                 contentDescription = stringResource(id = R.string.profile_image),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
