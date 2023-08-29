@@ -175,10 +175,16 @@ class ProfileViewModel @Inject constructor(
 
     private fun toggleFollowStateForUser(userId: String) {
         val isFollowing = state.value.profile?.isFollowing == true
+        val currentLikeCount = state.value.profile?.followerCount ?: 0
         viewModelScope.launch {
             _state.value = state.value.copy(
                 profile = state.value.profile?.copy(
-                    isFollowing = !isFollowing
+                    isFollowing = !isFollowing,
+                    followerCount = if(isFollowing) {
+                        currentLikeCount.minus(1)
+                    } else {
+                        currentLikeCount.plus(1)
+                    }
                 )
             )
             val result = profileUseCases.toggleFollowStateForUser(
@@ -190,7 +196,12 @@ class ProfileViewModel @Inject constructor(
                 is Resource.Error -> {
                     _state.value = state.value.copy(
                         profile = state.value.profile?.copy(
-                            isFollowing = isFollowing
+                            isFollowing = isFollowing,
+                            followerCount = if(isFollowing) {
+                                currentLikeCount.plus(1)
+                            } else {
+                                currentLikeCount.minus(1)
+                            }
                         )
                     )
                     _eventFlow.emit(UiEvent.ShowSnackbar(
