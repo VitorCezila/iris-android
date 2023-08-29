@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -24,6 +25,7 @@ import com.ghn.iris.R
 import com.ghn.iris.core.presentation.ui.theme.*
 import com.ghn.iris.core.domain.models.User
 import com.ghn.iris.core.presentation.components.SimpleCircleBorder
+import com.ghn.iris.core.util.base64ToImageBitmap
 
 @Composable
 fun ProfileHeaderSection(
@@ -37,25 +39,30 @@ fun ProfileHeaderSection(
     onLogoutClick: () -> Unit = {},
     onMessageClick: () -> Unit = {}
 ) {
+
+    val profilePictureBitMap = user.profileImageBase64.base64ToImageBitmap()
+
     Column(
         modifier = modifier
             .fillMaxWidth()
             .offset(y = -profilePictureSize / 2f),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(
-            painterResource(id = R.drawable.cezila),
-            contentDescription = stringResource(id = R.string.profile_image),
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .size(profilePictureSize)
-                .clip(CircleShape)
-                .border(
-                    width = 1.dp,
-                    brush = GradientBrush,
-                    shape = CircleShape
-                )
-        )
+        if(profilePictureBitMap != null) {
+            Image(
+                bitmap = profilePictureBitMap.asImageBitmap(),
+                contentDescription = stringResource(id = R.string.profile_image),
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .size(profilePictureSize)
+                    .clip(CircleShape)
+                    .border(
+                        width = 1.dp,
+                        brush = GradientBrush,
+                        shape = CircleShape
+                    )
+            )
+        }
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
@@ -74,16 +81,25 @@ fun ProfileHeaderSection(
             SimpleCircleBorder(
                 modifier = Modifier.size(36.dp)
             ) {
-                IconButton(
-                    onClick = onMessageClick,
-                ) {
-                    Icon(
-                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_mail),
-                        contentDescription = stringResource(R.string.message)
-                    )
-                }
+                if(isOwnProfile) {
+                    IconButton(
+                        onClick = onLogoutClick,
+                    ) {
+                        Icon(
+                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_logout),
+                            contentDescription = stringResource(R.string.logout)
+                        )
+                    }
+                } else
+                    IconButton(
+                        onClick = onMessageClick,
+                    ) {
+                        Icon(
+                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_mail),
+                            contentDescription = stringResource(R.string.message)
+                        )
+                    }
             }
-
         }
 
         Spacer(modifier = Modifier.height(SpaceMedium))

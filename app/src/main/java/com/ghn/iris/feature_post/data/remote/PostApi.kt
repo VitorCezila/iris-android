@@ -17,7 +17,7 @@ interface PostApi {
         @Query("pageSize") pageSize: Int
     ): List<PostDto>
 
-    @GET("/user/posts")
+    @GET("/user/post")
     suspend fun getPostsForProfile(
         @Query("userId") userId: String,
         @Query("page") page: Int,

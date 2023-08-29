@@ -21,7 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -40,6 +40,9 @@ fun Comment(
     comment: Comment,
     onLikeClick: (Boolean) -> Unit = {},
 ) {
+
+    val profilePictureBitMap = comment.profilePictureBitmap
+
     Column(
         modifier = Modifier
             .padding(16.dp)
@@ -49,13 +52,15 @@ fun Comment(
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
-                painterResource(id = R.drawable.sheep),
-                contentDescription = "Profile picture",
-                modifier = Modifier
-                    .size(ProfilePictureSize)
-                    .clip(RoundedCornerShape(25.dp))
-            )
+            if(profilePictureBitMap != null) {
+                Image(
+                    bitmap = profilePictureBitMap.asImageBitmap(),
+                    contentDescription = "Profile picture",
+                    modifier = Modifier
+                        .size(ProfilePictureSize)
+                        .clip(RoundedCornerShape(25.dp))
+                )
+            }
             Spacer(modifier = Modifier.width(16.dp))
             Column {
                 Text(

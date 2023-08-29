@@ -7,10 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.ghn.iris.R
 import com.ghn.iris.core.domain.models.Post
 import com.ghn.iris.core.presentation.PagingState
-import com.ghn.iris.core.util.DefaultPaginator
-import com.ghn.iris.core.util.ParentType
 import com.ghn.iris.core.presentation.util.UiEvent
+import com.ghn.iris.core.util.DefaultPaginator
 import com.ghn.iris.core.util.Event
+import com.ghn.iris.core.util.ParentType
 import com.ghn.iris.core.util.PostLiker
 import com.ghn.iris.core.util.Resource
 import com.ghn.iris.core.util.UiText

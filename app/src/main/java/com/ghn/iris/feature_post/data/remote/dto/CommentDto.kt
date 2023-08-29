@@ -1,6 +1,7 @@
 package com.ghn.iris.feature_post.data.remote.dto
 
 import com.ghn.iris.core.domain.models.Comment
+import com.ghn.iris.core.util.base64ToImageBitmap
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -17,7 +18,7 @@ data class CommentDto(
         return Comment(
             id = id,
             username = username,
-            profilePictureBase64 = profilePictureBase64,
+            profilePictureBitmap = profilePictureBase64.base64ToImageBitmap(),
             formattedTime = SimpleDateFormat("MMM dd, HH:mm", Locale.getDefault()).run {
                 format(timestamp)
             },

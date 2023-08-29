@@ -54,5 +54,10 @@
     <string name="post_created">Successfully created post</string>
     <string name="post_image">Post image</string>
     <string name="coming_soon">This feature is coming soon...</string>
+    <string name="error_username_bio_empty">Username or bio can\'t be empty</string>
+    <string name="logout">Logout</string>
+    <string name="do_you_want_to_logout">Do you want to logout?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
 
 </resources>

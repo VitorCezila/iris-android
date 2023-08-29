@@ -67,8 +67,7 @@ fun Navigation(
             HomeScreen(
                 onNavigateUp = navController::navigateUp,
                 onNavigate = navController::navigate,
-                scaffoldState = scaffoldState,
-                imageLoader = imageLoader
+                scaffoldState = scaffoldState
             )
         }
         composable(Screen.SearchScreen.route) {
@@ -91,9 +90,13 @@ fun Navigation(
             )
         ) {
             ProfileScreen(
-                imageLoader = imageLoader,
-                onNavigateUp = navController::navigateUp,
-                onNavigate = navController::navigate
+                userId = it.arguments?.getString("userId"),
+                onLogout = {
+                    navController.navigate(route = Screen.LoginScreen.route)
+                },
+                scaffoldState = scaffoldState,
+                onNavigate = navController::navigate,
+                onNavigateUp = navController::navigateUp
             )
         }
         composable(Screen.CreatePostScreen.route) {
