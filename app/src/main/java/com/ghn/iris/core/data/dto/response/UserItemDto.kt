@@ -1,6 +1,7 @@
 package com.ghn.iris.core.data.dto.response
 
 import com.ghn.iris.core.domain.models.UserItem
+import com.ghn.iris.core.util.base64ToImageBitmap
 
 data class UserItemDto(
     val userId: String,
@@ -13,7 +14,7 @@ data class UserItemDto(
         return UserItem(
             userId = userId,
             username = username,
-            profilePictureBase64 = profilePictureBase64,
+            profilePictureBitmap = profilePictureBase64.base64ToImageBitmap(),
             bio = bio,
             isFollowing = isFollowing
         )

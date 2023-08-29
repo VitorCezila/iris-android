@@ -2,6 +2,7 @@ package com.ghn.iris.core.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -36,8 +38,11 @@ fun UserProfileItem(
     user: UserItem,
     onActionItemClick: () -> Unit = {},
     actionIcon: @Composable () -> Unit = {},
+    onUserClick: () -> Unit = {},
     ownUserId: String = ""
 ) {
+
+    val profilePictureBitMap = user.profilePictureBitmap?.asImageBitmap()
 
     Column(
         modifier = Modifier
@@ -51,17 +56,22 @@ fun UserProfileItem(
                 .padding(
                     vertical = SpaceSmall,
                     horizontal = SpaceMedium
-                ),
+                )
+                .clickable {
+                    onUserClick()
+                },
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Image(
-                painterResource(id = R.drawable.sheep),
-                contentDescription = "Profile picture",
-                modifier = Modifier
-                    .size(ProfilePictureSize)
-                    .clip(CircleShape)
-            )
+            if (profilePictureBitMap != null) {
+                Image(
+                    bitmap = profilePictureBitMap,
+                    contentDescription = "Profile picture",
+                    modifier = Modifier
+                        .size(ProfilePictureSize)
+                        .clip(CircleShape)
+                )
+            }
             Column(
                 modifier = Modifier
                     .fillMaxHeight()

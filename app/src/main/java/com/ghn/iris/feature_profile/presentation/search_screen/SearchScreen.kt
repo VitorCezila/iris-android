@@ -18,7 +18,7 @@ import com.ghn.iris.R
 import com.ghn.iris.core.presentation.ui.theme.*
 import com.ghn.iris.core.domain.models.UserItem
 import com.ghn.iris.core.presentation.components.UserProfileItem
-import com.ghn.iris.core.domain.states.StandardTextFieldState
+import com.ghn.iris.core.util.Screen
 
 @Composable
 fun SearchScreen(
@@ -26,19 +26,18 @@ fun SearchScreen(
     onNavigateUp: () -> Unit = {},
     viewModel: SearchScreenViewModel = hiltViewModel()
 ) {
+    val state = viewModel.searchState.value
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(SpaceLarge)
     ) {
         OutlinedTextField(
-            value = viewModel.searchState.value.text,
+            value = viewModel.searchFieldState.value.text,
             onValueChange = {
-                viewModel.setSearchState(
-                    StandardTextFieldState(text = it)
-                )
+                viewModel.onEvent(SearchEvent.Query(it))
             },
-            isError = viewModel.searchState.value.error != null,
+            isError = viewModel.searchFieldState.value.error != null,
             placeholder = {
                 Text(text = stringResource(R.string.search_for_people))
             },
@@ -63,7 +62,7 @@ fun SearchScreen(
                 .height(55.dp)
                 .fillMaxWidth()
         )
-        if (viewModel.searchState.value.error != null) {
+        if (viewModel.searchFieldState.value.error != null) {
             Text(
                 text = "",
                 style = MaterialTheme.typography.body2,
@@ -79,35 +78,34 @@ fun SearchScreen(
         LazyColumn(
             modifier = Modifier.fillMaxSize()
         ) {
-            items(5) {
+            items(state.userItems.size) { i ->
+                val user = state.userItems[i]
                 UserProfileItem(
-                    user = mockUser,
+                    user = user,
                     actionIcon = {
                         IconButton(
                             onClick = {
+                                viewModel.onEvent(SearchEvent.ToggleFollowState(user.userId))
                             },
                             modifier = Modifier
                                 .size(IconSizeMedium)
                         ) {
                             Icon(
-                                imageVector = if (mockUser.isFollowing) {
+                                imageVector = if (user.isFollowing) {
                                     Icons.Default.PersonRemove
                                 } else Icons.Default.PersonAdd,
                                 contentDescription = null,
                                 tint = MaterialTheme.colors.onBackground,
                             )
                         }
+                    },
+                    onUserClick = {
+                        onNavigate(
+                            Screen.ProfileScreen.route + "?userId=${user.userId}"
+                        )
                     }
                 )
             }
         }
     }
 }
-
-private val mockUser = UserItem(
-    userId = "teste",
-    username = "cezila",
-    profilePictureBase64 = "",
-    bio = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a sem quam. Integer placerat efficitur mattis. Ut magna nunc, dictum rutrum augue ut, condimentum sollicitudin nisl. In est turpis, egestas in ex eu.",
-    isFollowing = true
-)
