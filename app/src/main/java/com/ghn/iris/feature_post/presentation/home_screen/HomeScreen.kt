@@ -1,5 +1,6 @@
 package com.ghn.iris.feature_post.presentation.home_screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -9,7 +10,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.*
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Divider
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ScaffoldState
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -21,11 +28,11 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import coil.ImageLoader
 import com.ghn.iris.R
 import com.ghn.iris.core.presentation.components.Post
 import com.ghn.iris.core.presentation.components.SimpleCircleBorder
 import com.ghn.iris.core.presentation.components.StandardToolbar
+import com.ghn.iris.core.presentation.ui.theme.GradientBrush
 import com.ghn.iris.core.presentation.ui.theme.SpaceLarge
 import com.ghn.iris.core.presentation.ui.theme.White
 import com.ghn.iris.core.util.Screen
@@ -34,7 +41,6 @@ import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun HomeScreen(
-    imageLoader: ImageLoader,
     scaffoldState: ScaffoldState,
     onNavigate: (String) -> Unit = {},
     onNavigateUp: () -> Unit = {},
@@ -56,7 +62,7 @@ fun HomeScreen(
             onNavigateUp = onNavigateUp,
             title = {
                 Text(
-                    "Good Morning, cezila",
+                    "Good Morning!",
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.body2,
                     color = White
@@ -106,10 +112,18 @@ fun HomeScreen(
                         },
                         onUserClicked = {
                             onNavigate(Screen.ProfileScreen.route + "?userId=${post.userId}")
+                        },
+                        onDeleteClick = {
+                            viewModel.onEvent(HomeEvent.DeletePost(post))
                         }
-                    ) {
-                        viewModel.onEvent(HomeEvent.DeletePost(post))
-                    }
+                    )
+                    Divider(
+                        thickness = 1.dp,
+                        modifier = Modifier
+                            .background(brush = GradientBrush)
+                            .height(0.5.dp)
+                    )
+
                     if (i < pagingState.items.size - 1) {
                         Spacer(modifier = Modifier.height(SpaceLarge))
                     }

@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import coil.ImageLoader
 import coil.decode.SvgDecoder
+import com.ghn.iris.core.domain.use_case.GetOwnUserIdUseCase
 import com.ghn.iris.core.util.Constants
 import com.ghn.iris.core.util.DefaultPostLiker
 import com.ghn.iris.core.util.PostLiker
@@ -43,7 +44,7 @@ object AppModule {
             }
             .addInterceptor(
                 HttpLoggingInterceptor().apply {
-                    level = HttpLoggingInterceptor.Level.BODY
+                    level = HttpLoggingInterceptor.Level.HEADERS
                 }
             )
             .build()
@@ -70,6 +71,12 @@ object AppModule {
     @Singleton
     fun provideGson(): Gson {
         return Gson()
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetOwnUserIdUseCase(sharedPreferences: SharedPreferences): GetOwnUserIdUseCase {
+        return GetOwnUserIdUseCase(sharedPreferences)
     }
 
 }

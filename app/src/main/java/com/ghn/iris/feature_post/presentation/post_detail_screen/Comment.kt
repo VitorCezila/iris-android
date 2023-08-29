@@ -33,6 +33,7 @@ import com.ghn.iris.core.presentation.ui.theme.ProfilePictureSize
 import com.ghn.iris.core.presentation.ui.theme.SocialPink
 import com.ghn.iris.core.presentation.ui.theme.SocialWhite
 import com.ghn.iris.core.presentation.ui.theme.SpaceMedium
+import com.ghn.iris.core.util.base64ToImageBitmap
 
 @Composable
 fun Comment(
@@ -40,6 +41,9 @@ fun Comment(
     comment: Comment,
     onLikeClick: (Boolean) -> Unit = {},
 ) {
+
+    val profilePictureBitMap = comment.profilePictureBase64.base64ToImageBitmap()
+
     Column(
         modifier = Modifier
             .padding(16.dp)
@@ -49,13 +53,15 @@ fun Comment(
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
-                painterResource(id = R.drawable.sheep),
-                contentDescription = "Profile picture",
-                modifier = Modifier
-                    .size(ProfilePictureSize)
-                    .clip(RoundedCornerShape(25.dp))
-            )
+            if(profilePictureBitMap != null) {
+                Image(
+                    bitmap = profilePictureBitMap,
+                    contentDescription = "Profile picture",
+                    modifier = Modifier
+                        .size(ProfilePictureSize)
+                        .clip(RoundedCornerShape(25.dp))
+                )
+            }
             Spacer(modifier = Modifier.width(16.dp))
             Column {
                 Text(

@@ -36,7 +36,7 @@ fun ProfileStats(
         )
         Spacer(modifier = Modifier.width(SpaceLarge))
         ProfileNumber(
-            number = user.followerCount,
+            number = user.followingCount,
             text = stringResource(id = R.string.following)
         )
 

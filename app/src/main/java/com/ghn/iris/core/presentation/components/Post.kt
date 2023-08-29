@@ -22,8 +22,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material.icons.filled.ChatBubble
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.DeleteOutline
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -91,6 +94,14 @@ fun Post(
                     style = MaterialTheme.typography.caption,
                     color = LightGray,
                     fontWeight = FontWeight.Medium
+                )
+            }
+            if(post.isOwnPost) {
+                PostAction(
+                    icon = Icons.Default.DeleteOutline,
+                    count = null,
+                    isSelected = false,
+                    onClick = onDeleteClick,
                 )
             }
         }

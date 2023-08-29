@@ -15,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ghn.iris.R
+import com.ghn.iris.core.util.base64ToImageBitmap
 import com.ghn.iris.core.util.toPx
 
 @Composable
@@ -24,16 +25,20 @@ fun BannerSection(
     iconSize: Dp = 35.dp,
 ) {
 
+    val profileBannerBitMap = profileBannerBase64?.base64ToImageBitmap()
+
     BoxWithConstraints(
         modifier = modifier
     ) {
-        Image(
-            painterResource(id = R.drawable.sheep),
-            contentDescription = stringResource(R.string.banner_image),
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxSize(),
-        )
+        if(profileBannerBitMap != null) {
+            Image(
+                bitmap = profileBannerBitMap,
+                contentDescription = stringResource(R.string.banner_image),
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxSize(),
+            )
+        }
         Box(
             modifier = Modifier
                 .fillMaxSize()
