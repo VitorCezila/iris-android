@@ -24,8 +24,8 @@ import androidx.compose.ui.unit.sp
 import com.ghn.iris.R
 import com.ghn.iris.core.presentation.ui.theme.*
 import com.ghn.iris.core.domain.models.Notification
-import com.ghn.iris.core.domain.util.NotificationAction
 import com.ghn.iris.core.util.Screen
+import com.ghn.iris.feature_notification.domain.NotificationType
 
 @Composable
 fun NotificationItem(
@@ -126,35 +126,35 @@ fun NotificationItem(
     }
 }
 
-fun getIconResId(notificationType: NotificationAction): Int {
+fun getIconResId(notificationType: NotificationType): Int {
     return when (notificationType) {
-        is NotificationAction.LikedComment -> {
+        is NotificationType.LikedComment -> {
             R.drawable.ic_like
         }
-        is NotificationAction.LikedPost -> {
+        is NotificationType.LikedPost -> {
             R.drawable.ic_like
         }
-        is NotificationAction.CommentedOnPost -> {
+        is NotificationType.CommentedOnPost -> {
             R.drawable.ic_comment
         }
-        is NotificationAction.FollowedUser -> {
+        is NotificationType.FollowedUser -> {
             R.drawable.ic_follow
         }
     }
 }
 
-fun getTintColor(activityType: NotificationAction): Color {
+fun getTintColor(activityType: NotificationType): Color {
     return when (activityType) {
-        is NotificationAction.LikedComment -> {
+        is NotificationType.LikedComment -> {
             SocialBlue
         }
-        is NotificationAction.LikedPost -> {
+        is NotificationType.LikedPost -> {
             SocialBlue
         }
-        is NotificationAction.CommentedOnPost -> {
+        is NotificationType.CommentedOnPost -> {
             SocialPink
         }
-        is NotificationAction.FollowedUser -> {
+        is NotificationType.FollowedUser -> {
             SocialPink
         }
     }
@@ -163,23 +163,23 @@ fun getTintColor(activityType: NotificationAction): Color {
 @Composable
 fun getNotificationTexts(notification: Notification): Pair<String, String> {
     val fillerText = when (notification.notificationType) {
-        is NotificationAction.LikedPost ->
+        is NotificationType.LikedPost ->
             stringResource(id = R.string.liked)
-        is NotificationAction.CommentedOnPost ->
+        is NotificationType.CommentedOnPost ->
             stringResource(id = R.string.commented_on)
-        is NotificationAction.FollowedUser ->
+        is NotificationType.FollowedUser ->
             stringResource(id = R.string.followed_you)
-        is NotificationAction.LikedComment -> {
+        is NotificationType.LikedComment -> {
             stringResource(id = R.string.liked)
         }
     }
     val actionText = when (notification.notificationType) {
-        is NotificationAction.LikedPost ->
+        is NotificationType.LikedPost ->
             stringResource(id = R.string.your_post)
-        is NotificationAction.CommentedOnPost ->
+        is NotificationType.CommentedOnPost ->
             stringResource(id = R.string.your_post)
-        is NotificationAction.FollowedUser -> ""
-        is NotificationAction.LikedComment -> {
+        is NotificationType.FollowedUser -> ""
+        is NotificationType.LikedComment -> {
             stringResource(id = R.string.your_comment)
         }
     }

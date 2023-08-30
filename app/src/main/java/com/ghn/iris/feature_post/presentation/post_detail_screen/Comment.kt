@@ -3,12 +3,14 @@ package com.ghn.iris.feature_post.presentation.post_detail_screen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -69,11 +71,33 @@ fun Comment(
                     fontWeight = FontWeight.Bold,
                     color = SocialWhite
                 )
-                Text(
-                    text = comment.content,
-                    style = MaterialTheme.typography.body2,
-                    color = SocialWhite
-                )
+                Row {
+                    Text(
+                        text = comment.content,
+                        style = MaterialTheme.typography.body2,
+                        color = SocialWhite,
+                        modifier = Modifier.weight(1f)
+                    )
+                    IconButton(
+                        onClick = {
+                            onLikeClick(comment.isLiked)
+                        },
+                        modifier = Modifier
+                            .size(18.dp),
+                    ) {
+                        Icon(
+                            imageVector = if (comment.isLiked) {
+                                Icons.Default.Favorite
+                            } else Icons.Rounded.FavoriteBorder,
+                            tint = if (comment.isLiked) {
+                                SocialPink
+                            } else LightGray,
+                            contentDescription = if (comment.isLiked) {
+                                stringResource(id = R.string.unlike)
+                            } else stringResource(id = R.string.like)
+                        )
+                    }
+                }
                 Row {
                     Text(
                         text = comment.formattedTime,
@@ -93,26 +117,6 @@ fun Comment(
                         color = LightGray
                     )
                 }
-            }
-            Spacer(modifier = Modifier.weight(1f))
-            IconButton(
-                onClick = {
-                    onLikeClick(comment.isLiked)
-                },
-                modifier = Modifier
-                    .size(18.dp),
-            ) {
-                Icon(
-                    imageVector = if (comment.isLiked) {
-                        Icons.Default.Favorite
-                    } else Icons.Rounded.FavoriteBorder,
-                    tint = if (comment.isLiked) {
-                        SocialPink
-                    } else LightGray,
-                    contentDescription = if (comment.isLiked) {
-                        stringResource(id = R.string.unlike)
-                    } else stringResource(id = R.string.like)
-                )
             }
         }
     }
