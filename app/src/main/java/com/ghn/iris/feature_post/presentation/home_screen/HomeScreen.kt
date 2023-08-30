@@ -37,7 +37,11 @@ import com.ghn.iris.core.presentation.ui.theme.SpaceLarge
 import com.ghn.iris.core.presentation.ui.theme.White
 import com.ghn.iris.core.util.Screen
 import com.ghn.iris.core.util.sendSharePostIntent
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreen(
@@ -46,7 +50,11 @@ fun HomeScreen(
     onNavigateUp: () -> Unit = {},
     viewModel: HomeViewModel = hiltViewModel()
 ) {
+    val state = viewModel.state.value
+
     val pagingState = viewModel.pagingState.value
+    val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = pagingState.isLoading)
+
     val context = LocalContext.current
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
@@ -62,7 +70,7 @@ fun HomeScreen(
             onNavigateUp = onNavigateUp,
             title = {
                 Text(
-                    "Good Morning!",
+                    "Good Morning, ${state.profile?.username}!",
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.body2,
                     color = White
@@ -73,7 +81,10 @@ fun HomeScreen(
                     modifier = Modifier.size(36.dp)
                 ) {
                     IconButton(onClick = {
-                        onNavigate(Screen.MessagesScreen.route)
+                        GlobalScope.launch {
+                            scaffoldState.snackbarHostState.showSnackbar(message = "This feature is coming soon")
+                        }
+                        //onNavigate(Screen.MessagesScreen.route)
                     }) {
                         Icon(
                             imageVector = ImageVector.vectorResource(id = R.drawable.ic_mail),
@@ -90,46 +101,53 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            LazyColumn {
-                items(pagingState.items.size) { i ->
-                    val post = pagingState.items[i]
-                    if (i >= pagingState.items.size - 1 && !pagingState.endReached && !pagingState.isLoading) {
-                        viewModel.loadNextPosts()
-                    }
-                    Post(
-                        post = post,
-                        onPostClicked = {
-                            onNavigate(Screen.PostDetailScreen.route + "/${post.id}")
-                        },
-                        onLikeClicked = {
-                            viewModel.onEvent(HomeEvent.LikedPost(post.id))
-                        },
-                        onCommentClicked = {
-                            onNavigate(Screen.PostDetailScreen.route + "/${post.id}?shouldShowKeyboard=true")
-                        },
-                        onShareClicked = {
-                            context.sendSharePostIntent(post.id)
-                        },
-                        onUserClicked = {
-                            onNavigate(Screen.ProfileScreen.route + "?userId=${post.userId}")
-                        },
-                        onDeleteClick = {
-                            viewModel.onEvent(HomeEvent.DeletePost(post))
-                        }
-                    )
-                    Divider(
-                        thickness = 1.dp,
-                        modifier = Modifier
-                            .background(brush = GradientBrush)
-                            .height(0.5.dp)
-                    )
-
-                    if (i < pagingState.items.size - 1) {
-                        Spacer(modifier = Modifier.height(SpaceLarge))
-                    }
+            SwipeRefresh(
+                state = swipeRefreshState,
+                onRefresh = {
+                    viewModel.loadInitialFeed()
                 }
-                item {
-                    Spacer(modifier = Modifier.height(90.dp))
+            ) {
+                LazyColumn {
+                    items(pagingState.items.size) { i ->
+                        val post = pagingState.items[i]
+                        if (i >= pagingState.items.size - 1 && !pagingState.endReached && !pagingState.isLoading) {
+                            viewModel.loadNextPosts()
+                        }
+                        Post(
+                            post = post,
+                            onPostClicked = {
+                                onNavigate(Screen.PostDetailScreen.route + "/${post.id}")
+                            },
+                            onLikeClicked = {
+                                viewModel.onEvent(HomeEvent.LikedPost(post.id))
+                            },
+                            onCommentClicked = {
+                                onNavigate(Screen.PostDetailScreen.route + "/${post.id}?shouldShowKeyboard=true")
+                            },
+                            onShareClicked = {
+                                context.sendSharePostIntent(post.id)
+                            },
+                            onUserClicked = {
+                                onNavigate(Screen.ProfileScreen.route + "?userId=${post.userId}")
+                            },
+                            onDeleteClick = {
+                                viewModel.onEvent(HomeEvent.DeletePost(post))
+                            }
+                        )
+                        Divider(
+                            thickness = 1.dp,
+                            modifier = Modifier
+                                .background(brush = GradientBrush)
+                                .height(0.5.dp)
+                        )
+
+                        if (i < pagingState.items.size - 1) {
+                            Spacer(modifier = Modifier.height(SpaceLarge))
+                        }
+                    }
+                    item {
+                        Spacer(modifier = Modifier.height(90.dp))
+                    }
                 }
             }
             if (pagingState.isLoading) {

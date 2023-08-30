@@ -21,6 +21,7 @@ class CropActivityResultContract : ActivityResultContract<Uri, Uri?>() {
                 )
             )
         )
+            .withAspectRatio(1f, 1f)
             .getIntent(context)
     }
 
