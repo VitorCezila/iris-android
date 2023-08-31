@@ -1,6 +1,5 @@
 package com.ghn.iris.feature_profile.presentation.profile_screen
 
-import android.util.Base64
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -44,7 +43,6 @@ import com.ghn.iris.core.presentation.components.Post
 import com.ghn.iris.core.presentation.ui.theme.DarkGray
 import com.ghn.iris.core.presentation.ui.theme.ProfilePictureSizeLarge
 import com.ghn.iris.core.presentation.ui.theme.SpaceMedium
-import com.ghn.iris.core.presentation.ui.theme.SpaceSmall
 import com.ghn.iris.core.presentation.util.UiEvent
 import com.ghn.iris.core.presentation.util.asString
 import com.ghn.iris.core.util.Screen
@@ -52,7 +50,9 @@ import com.ghn.iris.core.util.sendSharePostIntent
 import com.ghn.iris.core.util.toPx
 import com.ghn.iris.feature_profile.presentation.profile_screen.components.BannerSection
 import com.ghn.iris.feature_profile.presentation.profile_screen.components.ProfileHeaderSection
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @Composable
@@ -68,20 +68,7 @@ fun ProfileScreen(
     val context = LocalContext.current
     val pagingState = viewModel.pagingState.value
     val lazyListState = rememberLazyListState()
-    val toolbarState = viewModel.toolbarState.value
-
-    val iconHorizontalCenterLength =
-        (LocalConfiguration.current.screenWidthDp.dp.toPx() / 4f -
-                (profilePictureSize / 4f).toPx() -
-                SpaceSmall.toPx()) / 2f
-    val iconSizeExpanded = 35.dp
     val toolbarHeightCollapsed = 75.dp
-    val imageCollapsedOffsetY = remember {
-        (toolbarHeightCollapsed - profilePictureSize / 2f) / 2f
-    }
-    val iconCollapsedOffsetY = remember {
-        (toolbarHeightCollapsed - iconSizeExpanded) / 2f
-    }
     val bannerHeight = (LocalConfiguration.current.screenWidthDp / 2.5f).dp
     val toolbarHeightExpanded = remember {
         bannerHeight + profilePictureSize
@@ -161,12 +148,15 @@ fun ProfileScreen(
                             viewModel.onEvent(ProfileEvent.ShowLogoutDialog)
                         },
                         onEditClick = {
-                            onNavigate(Screen.EditProfileScreen.route)
+                            onNavigate(Screen.EditProfileScreen.route + "/${profile.userId}")
                         },
                         onMessageClick = {
                             Timber.d("Profile user id is ${profile.userId}")
-                            val encodedProfilePictureUrl = Base64.encodeToString(profile.profileImageBase64.encodeToByteArray(), 0)
-                            onNavigate(Screen.MessagesScreen.route + "/${profile.userId}/${profile.username}/${encodedProfilePictureUrl}")
+                            GlobalScope.launch {
+                                scaffoldState.snackbarHostState.showSnackbar(message = "This feature is coming soon")
+                            }
+//                            val encodedProfilePictureUrl = Base64.encodeToString(profile.profileImageBase64.encodeToByteArray(), 0)
+//                            onNavigate(Screen.MessagesScreen.route + "/${profile.userId}/${profile.username}/${encodedProfilePictureUrl}")
                         },
                         onFollowClick = {
                             viewModel.onEvent(ProfileEvent.ToggleFollowState(profile.userId))

@@ -7,10 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ghn.iris.R
 import com.ghn.iris.core.domain.states.StandardTextFieldState
+import com.ghn.iris.core.domain.use_case.GetOwnUserIdUseCase
 import com.ghn.iris.core.presentation.util.UiEvent
 import com.ghn.iris.core.util.Resource
 import com.ghn.iris.core.util.UiText
 import com.ghn.iris.feature_post.domain.PostUseCases
+import com.ghn.iris.feature_profile.domain.use_case.ProfileUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -19,8 +21,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CreatePostViewModel @Inject constructor(
-    private val postUseCases: PostUseCases
+    private val postUseCases: PostUseCases,
+    private val getOwnUserId: GetOwnUserIdUseCase,
+    private val profileUseCases: ProfileUseCases
 ) : ViewModel() {
+
+    private val _state = mutableStateOf(CreatePostState())
+    val state: State<CreatePostState> = _state
 
     private val _contentState = mutableStateOf(StandardTextFieldState());
     val contentState: State<StandardTextFieldState> = _contentState
@@ -73,6 +80,22 @@ class CreatePostViewModel @Inject constructor(
                     }
                     _isLoading.value = false
                 }
+            }
+        }
+    }
+
+    fun loadProfile() {
+        viewModelScope.launch {
+            val result = profileUseCases.getProfile(
+                getOwnUserId.invoke()
+            )
+            when(result) {
+                is Resource.Success -> {
+                    _state.value = state.value.copy(
+                        profile = result.data
+                    )
+                }
+                else -> {}
             }
         }
     }

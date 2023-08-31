@@ -5,8 +5,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.view.inputmethod.InputMethodManager
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.asImageBitmap
 import java.io.InputStream
 
 fun Context.showKeyboard() {
@@ -14,12 +12,12 @@ fun Context.showKeyboard() {
     imm?.showSoftInput(null, InputMethodManager.SHOW_FORCED)
 }
 
-fun Context.loadBitmapFromUri(uri: Uri): ImageBitmap? {
+fun Context.loadBitmapFromUri(uri: Uri): Bitmap? {
     var bitmap: Bitmap? = null
     val inputStream: InputStream? = contentResolver.openInputStream(uri)
     if (inputStream != null) {
         bitmap = BitmapFactory.decodeStream(inputStream)
     }
     inputStream?.close()
-    return bitmap?.asImageBitmap()
+    return bitmap
 }

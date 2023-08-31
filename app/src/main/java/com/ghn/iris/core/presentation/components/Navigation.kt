@@ -12,7 +12,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import coil.ImageLoader
-import com.ghn.iris.core.domain.models.Profile
 import com.ghn.iris.core.util.Screen
 import com.ghn.iris.feature_auth.presentation.login_screen.LoginScreen
 import com.ghn.iris.feature_auth.presentation.register_screen.RegisterScreen
@@ -139,23 +138,16 @@ fun Navigation(
                 shouldShowKeyboard = shouldShowKeyboard,
             )
         }
-        composable(Screen.EditProfileScreen.route) {
-            val mockProfile = Profile(
-                userId = "0",
-                username = "cezila",
-                profileImageBase64 = "",
-                profileBannerBase64 = "",
-                bio = "Writer by Profession. Artist by Passion!",
-                followerCount = 2467,
-                followingCount = 1589,
-                postCount = 5,
-                isFollowing = false,
-                isOwnProfile = true
-            )
+        composable(
+            Screen.EditProfileScreen.route + "/{userId}",
+            arguments = listOf(navArgument(name = "userId") {
+                type = NavType.StringType
+            })
+        ) {
             EditProfileScreen(
+                scaffoldState = scaffoldState,
                 onNavigateUp = navController::navigateUp,
-                onNavigate = navController::navigate,
-                profile = mockProfile
+                onNavigate = navController::navigate
             )
         }
     }

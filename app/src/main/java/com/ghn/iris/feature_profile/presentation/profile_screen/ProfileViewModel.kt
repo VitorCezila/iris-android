@@ -17,7 +17,6 @@ import com.ghn.iris.core.util.PostLiker
 import com.ghn.iris.core.util.Resource
 import com.ghn.iris.core.util.UiText
 import com.ghn.iris.feature_post.domain.PostUseCases
-import com.ghn.iris.feature_profile.domain.model.Profile
 import com.ghn.iris.feature_profile.domain.use_case.ProfileUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -59,9 +58,9 @@ class ProfileViewModel @Inject constructor(
                 page = page
             )
         },
-        onSuccess = { posts ->
+        onSuccess = { posts, firstPage ->
             _pagingState.value = pagingState.value.copy(
-                items = pagingState.value.items + posts,
+                items = if(firstPage) posts else pagingState.value.items + posts,
                 endReached = posts.isEmpty(),
                 isLoading = false
             )
@@ -80,7 +79,7 @@ class ProfileViewModel @Inject constructor(
     }
 
     init {
-        loadNextPosts()
+        loadInitialPosts()
     }
 
     fun onEvent(event: ProfileEvent) {
@@ -138,8 +137,6 @@ class ProfileViewModel @Inject constructor(
                         UiEvent.ShowSnackbar(result.uiText ?: UiText.unknownError())
                     )
                 }
-
-                else -> {}
             }
         }
     }
@@ -147,6 +144,12 @@ class ProfileViewModel @Inject constructor(
     fun loadNextPosts() {
         viewModelScope.launch {
             paginator.loadNextItems()
+        }
+    }
+
+    private fun loadInitialPosts() {
+        viewModelScope.launch {
+            paginator.loadFirstItems()
         }
     }
 
@@ -238,8 +241,6 @@ class ProfileViewModel @Inject constructor(
                         )
                     )
                 }
-
-                else -> {}
             }
         }
     }
