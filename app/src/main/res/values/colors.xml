@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="social_pink">#FFF62E8E</color>
+    <color name="social_blue">#FF2E8AF6</color>
+    <color name="dark_black">#FF181A1C</color>
+    <color name="light_white">#FFECEBED</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="dark_gray">#FF323436</color>
+    <color name="light_gray">#FF727477</color>
+</resources>
