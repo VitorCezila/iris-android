@@ -66,7 +66,7 @@ fun SplashScreen(
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "Íris",
+            text = "IRIS.",
             style = MaterialTheme.typography.h1,
             fontSize = 36.sp,
             modifier = Modifier
