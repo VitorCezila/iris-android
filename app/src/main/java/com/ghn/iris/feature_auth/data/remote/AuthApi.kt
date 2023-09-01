@@ -1,5 +1,6 @@
 package com.ghn.iris.feature_auth.data.remote
 
+import com.ghn.iris.BuildConfig
 import com.ghn.iris.core.data.dto.response.BasicApiResponse
 import com.ghn.iris.feature_auth.data.remote.request.CreateAccountRequest
 import com.ghn.iris.feature_auth.data.remote.request.LoginRequest
@@ -24,7 +25,7 @@ interface AuthApi {
     suspend fun authenticate()
 
     companion object {
-        const val BASE_URL = "http://192.168.15.20:8080"
-        const val BASE_URL_PROD = "https://iris-api.herokuapp.com"
+        val BASE_URL_DESENV: String = BuildConfig.BASE_URL_DESENV
+        val BASE_URL: String = BuildConfig.BASE_URL
     }
 }
