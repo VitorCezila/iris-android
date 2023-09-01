@@ -1,5 +1,6 @@
 package com.ghn.iris.feature_post.data.remote
 
+import com.ghn.iris.BuildConfig
 import com.ghn.iris.core.data.dto.response.BasicApiResponse
 import com.ghn.iris.core.data.dto.response.UserItemDto
 import com.ghn.iris.feature_post.data.remote.dto.CommentDto
@@ -68,6 +69,7 @@ interface PostApi {
     )
 
     companion object {
-        const val BASE_URL = "http://192.168.15.20:8080"
+        val BASE_URL_DESENV: String = BuildConfig.BASE_URL_DESENV
+        val BASE_URL: String = BuildConfig.BASE_URL
     }
 }
