@@ -1,5 +1,6 @@
 package com.ghn.iris.feature_notification.data.remote
 
+import com.ghn.iris.BuildConfig
 import com.ghn.iris.core.util.Constants
 import com.ghn.iris.feature_notification.data.remote.dto.NotificationDto
 import retrofit2.http.GET
@@ -14,7 +15,8 @@ interface NotificationApi {
     ): List<NotificationDto>
 
     companion object {
-        const val BASE_URL = "http://192.168.15.20:8080/"
+        val BASE_URL_DESENV: String = BuildConfig.BASE_URL_DESENV
+        val BASE_URL: String = BuildConfig.BASE_URL
     }
 
 }

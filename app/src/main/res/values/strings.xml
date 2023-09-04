@@ -61,5 +61,6 @@
     <string name="yes">Yes</string>
     <string name="error_couldnt_load_profile">Oops! Couldn\'t load profile</string>
     <string name="updated_profile">Successfully updated profile</string>
+    <string name="username_input_too_short">Username too short</string>
 
 </resources>

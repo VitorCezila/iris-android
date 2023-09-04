@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ScaffoldState
@@ -11,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalContext
@@ -97,6 +99,11 @@ fun PostDetailScreen(
                         .fillMaxWidth()
                         .background(DarkBlack)
                 ) {
+                    if (state.isLoadingPost) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.align(Alignment.CenterHorizontally)
+                        )
+                    }
                     state.post?.let { post ->
                         Post(
                             post = post,
@@ -125,6 +132,11 @@ fun PostDetailScreen(
                                 .padding(start = 16.dp, end = 16.dp)
                         )
 
+                    }
+                    if (state.isLoadingComments && !state.isLoadingPost) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.align(Alignment.CenterHorizontally)
+                        )
                     }
                 }
 

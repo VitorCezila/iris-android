@@ -7,7 +7,7 @@ object Constants {
     const val SPLASH_SCREEN_DURATION = 500L
 
 
-    const val MIN_USERNAME_LENGTH = 6
+    const val MIN_USERNAME_LENGTH = 4
     const val MIN_PASSWORD_LENGTH = 6
 
     const val DEFAULT_PAGE_SIZE = 20
