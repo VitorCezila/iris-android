@@ -132,22 +132,6 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             paginator.loadFirstItems()
         }
-//        _pagingState.value = pagingState.value.copy(isLoading = true)
-//        viewModelScope.launch {
-//            val result = postUseCases.getPostsForFollows(0)
-//            when(result) {
-//                is Resource.Success -> {
-//                    _pagingState.value = pagingState.value.copy(
-//                        items = result.data ?: emptyList(),
-//                        endReached = result.data?.isEmpty() ?: true
-//                    )
-//                }
-//                is Resource.Error -> {
-//                    _eventFlow.emit(UiEvent.ShowSnackbar(result.uiText ?: UiText.unknownError()))
-//                }
-//            }
-//            _pagingState.value = pagingState.value.copy(isLoading = false)
-//        }
     }
 
     private fun toggleLikeForParent(

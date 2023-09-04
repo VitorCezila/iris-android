@@ -62,7 +62,6 @@ fun HomeScreen(
 
             }
         }
-
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -70,7 +69,7 @@ fun HomeScreen(
             onNavigateUp = onNavigateUp,
             title = {
                 Text(
-                    "Good Morning, ${state.profile?.username}!",
+                    "IRIS.",
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.body2,
                     color = White
@@ -84,7 +83,6 @@ fun HomeScreen(
                         GlobalScope.launch {
                             scaffoldState.snackbarHostState.showSnackbar(message = "This feature is coming soon")
                         }
-                        //onNavigate(Screen.MessagesScreen.route)
                     }) {
                         Icon(
                             imageVector = ImageVector.vectorResource(id = R.drawable.ic_mail),
