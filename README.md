@@ -31,3 +31,11 @@ Iris, you can create posts, follow your favorite users, and engage in chat conve
   a community of like-minded individuals.
 - Engage in real-time conversations with other Iris users through the chat feature. Chat with your
   friends or connect with new people who share your interests.
+
+  ---
+
+
+<img src="https://github.com/VitorCezila/iris-android/assets/70729616/923f11ff-3be8-453d-b8f5-fe0c012d18ad" width="220">
+<img src="https://github.com/VitorCezila/iris-android/assets/70729616/f5eadcb8-2b1b-4d04-946e-44b43ff076d5" width="220">
+<img src="https://github.com/VitorCezila/iris-android/assets/70729616/84f31ddd-8761-4c5e-af7a-d9199f4b96ef" width="220">
+
